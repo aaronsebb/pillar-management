@@ -1,7 +1,7 @@
 #archivos de compilacion
-/build/
-/dist/
-/nbproject/private/
+build/
+dist/
+nbproject/
 
 #clases autogeneradas
 *.class
