@@ -2,6 +2,7 @@
 build/
 dist/
 nbproject/
+nbbuild/
 
 #clases autogeneradas
 *.class
