@@ -9,5 +9,5 @@ package java.com.pillargroup.pillarmanagement.users.controller;
  * @author informatica
  */
 public class LoginController {
-    
+    //aronn es el mas gallo jajaja
 }
