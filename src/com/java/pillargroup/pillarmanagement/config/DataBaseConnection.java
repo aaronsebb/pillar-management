@@ -1,4 +1,4 @@
-package java.com.pillargroup.pillarmanagement.config;
+package com.java.pillargroup.pillarmanagement.config;
 
 import java.sql.Connection;
 import java.sql.SQLException;
