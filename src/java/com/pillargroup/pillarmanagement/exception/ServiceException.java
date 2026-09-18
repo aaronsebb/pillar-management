@@ -9,7 +9,12 @@ package java.com.pillargroup.pillarmanagement.exception;
  * @author informatica
  */
 public class ServiceException extends Exception {
+    /*galoo*/
     public ServiceException(String message){
         super (message);
+        
+        
+        
+        
     }
 }
