@@ -1,13 +1,35 @@
-
 package com.java.pillargroup.pillarmanagement.users;
 
+
 import com.java.pillargroup.pillarmanagement.config.DataBaseConnection;
+import com.java.pillargroup.pillarmanagement.users.User;
+import com.java.pillargroup.pillarmanagement.users.UserDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AuthRepository {
+public class AuthRepository{
+    
+    
+    
+    
+    public boolean save(User user) throws SQLException{
+    
+    String sql = "Insert into users (first_name,last_name,email,password_hash,role_id) Values(?,?,?,?,?);";
+    
+      try(Connection conn = DataBaseConnection.getConnection();PreparedStatement prst = conn.prepareStatement(sql)){
+        
+    prst.setString(1,user.getFirstName());
+    prst.setString(2, user.getLastName());
+    prst.setString(3, user.getEmai());
+    prst.setString(4, user.getEmai());
+    prst.setString(5, user.getEmai());    
+    
+        return prst.execute();
+    
+    }
+    }
     
     
     
