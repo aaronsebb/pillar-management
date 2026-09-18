@@ -1,12 +1,3 @@
-<<<<<<<< HEAD:src/java/com/pillargroup/pillarmanagement/users/model/Role.java
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package java.com.pillargroup.pillarmanagement.users.model;
-========
->>>>>>>> 50a2f0de92e44f1b08df38a3a636f288093e2239:src/com/java/pillargroup/pillarmanagement/users/Role.java
-
 package com.java.pillargroup.pillarmanagement.users;
 
 
