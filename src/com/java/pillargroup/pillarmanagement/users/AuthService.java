@@ -4,7 +4,7 @@
  */
 package com.java.pillargroup.pillarmanagement.users;
 
-import java.com.pillargroup.pillarmanagement.exception.ServiceException;
+import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import java.sql.SQLException;
 
 public class AuthService {
