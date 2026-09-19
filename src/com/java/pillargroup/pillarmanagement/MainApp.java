@@ -1,4 +1,4 @@
-package java.com.pillargroup.pillarmanagement;
+package com.java.pillargroup.pillarmanagement;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
