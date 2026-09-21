@@ -1,9 +1,8 @@
 package com.java.pillargroup.pillarmanagement.users;
 
 
+import com.java.pillargroup.pillarmanagement.addresses.model.Address;
 import com.java.pillargroup.pillarmanagement.config.DataBaseConnection;
-import com.java.pillargroup.pillarmanagement.users.User;
-import com.java.pillargroup.pillarmanagement.users.UserDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -12,6 +11,48 @@ import java.sql.ResultSet;
 public class AuthRepository{
     
     
+    
+    public void saveUserAddress(Address address,String userId) throws SQLException{
+        
+    String sql1 = "insert into addresses values(?,?,?,?,?,?,?)";
+    String sql2 = "update users set address = ? where user_id = ?"; 
+    
+    try(Connection conn = DataBaseConnection.getConnection()){
+        
+        try(PreparedStatement prst = conn.prepareStatement(sql1);
+              PreparedStatement prstAsignation = conn.prepareStatement(sql2)  
+                ){
+            
+            conn.setAutoCommit(false);
+            
+        prst.setString(1, address.getAddressId());
+        prst.setString(2, address.getCity());
+        prst.setString(3, address.getDistrict()); 
+        prst.setString(4, address.getAvenue());
+        prst.setString(5, address.getStreet());
+        prst.setString(6, address.getHouse());
+        
+        prst.executeUpdate();
+        
+        prstAsignation.setString(1, address.getAddressId());
+        prstAsignation.setString(2, userId);
+        
+        prstAsignation.executeUpdate();
+        
+        }catch(SQLException e){
+        
+        conn.rollback();
+        
+        }finally{
+        
+        conn.setAutoCommit(true);
+        
+        }
+    }
+        }
+
+        
+        
     
     
     public boolean save(User user) throws SQLException{
@@ -73,10 +114,10 @@ public class AuthRepository{
     }else{
         
         return null;
-    
+     
     }
+        }
     }
-     }
     }
     
     
