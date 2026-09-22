@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.java.pillargroup.pillarmanagement.residence.model;
 
 /**
@@ -17,12 +13,11 @@ public class Residence {
     String depiction;
     String lumpSum;
     String monthlyPayment;
-    int category;
     String addressName;
     String userName;
     String residenceStatus;
 
-    public Residence(String residenceId, String categoryName, String statusName, String urlImage, String residenceName, String depiction, String lumpSum, String monthlyPayment, int category, String addressName, String userName, String residenceStatus) {
+    public Residence(String residenceId, String categoryName, String statusName, String urlImage, String residenceName, String depiction, String lumpSum, String monthlyPayment, String addressName, String userName, String residenceStatus) {
         this.residenceId = residenceId;
         this.categoryName = categoryName;
         this.statusName = statusName;
@@ -31,7 +26,6 @@ public class Residence {
         this.depiction = depiction;
         this.lumpSum = lumpSum;
         this.monthlyPayment = monthlyPayment;
-        this.category = category;
         this.addressName = addressName;
         this.userName = userName;
         this.residenceStatus = residenceStatus;
@@ -99,14 +93,6 @@ public class Residence {
 
     public void setMonthlyPayment(String monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
-    }
-
-    public int getCategory() {
-        return category;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
     }
 
     public String getAddressName() {
