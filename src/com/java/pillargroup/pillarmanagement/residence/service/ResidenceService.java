@@ -22,7 +22,7 @@ public class ResidenceService {
         this.residenceRepository = residenceRepository;
     }
 
-    public Residence create(Residence residence) throws SQLException {
+    public boolean create(Residence residence) throws SQLException {
         validate(residence);
 
         if (residence.getResidenceId() != null && !residence.getResidenceId().trim().isEmpty()) {
@@ -71,7 +71,7 @@ public class ResidenceService {
         if (residence == null) {
             throw new IllegalArgumentException("La residencia no puede ser nula");
         }
-        if (residence.getStatusId() == null) {
+        if (residence.getStatusId() <= 0) {
             throw new IllegalArgumentException("El status_id es obligatorio");
         }
         if (residence.getLumpSum() <= 0) {
