@@ -1,38 +1,39 @@
 package com.java.pillargroup.pillarmanagement.residence.model;
 
 /**
- *
  * @author informatica
  */
 public class Residence {
 
     private String residenceId;
-    private Integer categoryId;       
-    private Integer statusId;         
+    private String categoryName;
+    private String statusName;
     private String urlImage;
     private String residenceName;
     private String depiction;
-    private double lumpSum;           
-    private double monthlyPayment;    
-    private String addressId;         
-    private String userId;            
+    private String lumpSum;
+    private String monthlyPayment;
+    private String addressName;
+    private String userName;
+    private String residenceStatus;
 
-    public Residence(String residenceId, Integer categoryId, Integer statusId, String urlImage,
-        String residenceName, String depiction, double lumpSum, double monthlyPayment,
-        String addressId, String userId) {
+    public Residence() {
+    }
+
+    public Residence(String residenceId, String categoryName, String statusName, String urlImage, 
+                     String residenceName, String depiction, String lumpSum, String monthlyPayment, 
+                     String addressName, String userName, String residenceStatus) {
         this.residenceId = residenceId;
-        this.categoryId = categoryId;
-        this.statusId = statusId;
+        this.categoryName = categoryName;
+        this.statusName = statusName;
         this.urlImage = urlImage;
         this.residenceName = residenceName;
         this.depiction = depiction;
         this.lumpSum = lumpSum;
         this.monthlyPayment = monthlyPayment;
-        this.addressId = addressId;
-        this.userId = userId;
-    }
-
-    public Residence() {
+        this.addressName = addressName;
+        this.userName = userName;
+        this.residenceStatus = residenceStatus;
     }
 
     public String getResidenceId() {
@@ -43,20 +44,20 @@ public class Residence {
         this.residenceId = residenceId;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public Integer getStatusId() {
-        return statusId;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatusId(Integer statusId) {
-        this.statusId = statusId;
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getUrlImage() {
@@ -83,35 +84,43 @@ public class Residence {
         this.depiction = depiction;
     }
 
-    public double getLumpSum() {
+    public String getLumpSum() {
         return lumpSum;
     }
 
-    public void setLumpSum(double lumpSum) {
+    public void setLumpSum(String lumpSum) {
         this.lumpSum = lumpSum;
     }
 
-    public double getMonthlyPayment() {
+    public String getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    public void setMonthlyPayment(double monthlyPayment) {
+    public void setMonthlyPayment(String monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public String getAddressId() {
-        return addressId;
+    public String getAddressName() {
+        return addressName;
     }
 
-    public void setAddressId(String addressId) {
-        this.addressId = addressId;
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getResidenceStatus() {
+        return residenceStatus;
+    }
+
+    public void setResidenceStatus(String residenceStatus) {
+        this.residenceStatus = residenceStatus;
     }
 }
