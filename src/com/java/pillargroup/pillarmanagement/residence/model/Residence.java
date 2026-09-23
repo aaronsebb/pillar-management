@@ -6,34 +6,32 @@ package com.java.pillargroup.pillarmanagement.residence.model;
 public class Residence {
 
     private String residenceId;
-    private String categoryName;
-    private String statusName;
+    private int categoryId;
+    private int statusId;
     private String urlImage;
     private String residenceName;
     private String depiction;
-    private String lumpSum;
-    private String monthlyPayment;
-    private String addressName;
-    private String userName;
-    private String residenceStatus;
+    private double lumpSum;
+    private double monthlyPayment;
+    private String addressId;
+    private String userId;
 
     public Residence() {
     }
 
-    public Residence(String residenceId, String categoryName, String statusName, String urlImage, 
-                     String residenceName, String depiction, String lumpSum, String monthlyPayment, 
-                     String addressName, String userName, String residenceStatus) {
+    public Residence(String residenceId, int categoryId, int statusId, String urlImage,
+                      String residenceName, String depiction, double lumpSum, double monthlyPayment,
+                      String addressId, String userId) {
         this.residenceId = residenceId;
-        this.categoryName = categoryName;
-        this.statusName = statusName;
+        this.categoryId = categoryId;
+        this.statusId = statusId;
         this.urlImage = urlImage;
         this.residenceName = residenceName;
         this.depiction = depiction;
         this.lumpSum = lumpSum;
         this.monthlyPayment = monthlyPayment;
-        this.addressName = addressName;
-        this.userName = userName;
-        this.residenceStatus = residenceStatus;
+        this.addressId = addressId;
+        this.userId = userId;
     }
 
     public String getResidenceId() {
@@ -44,20 +42,20 @@ public class Residence {
         this.residenceId = residenceId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 
     public String getUrlImage() {
@@ -84,43 +82,35 @@ public class Residence {
         this.depiction = depiction;
     }
 
-    public String getLumpSum() {
+    public double getLumpSum() {
         return lumpSum;
     }
 
-    public void setLumpSum(String lumpSum) {
+    public void setLumpSum(double lumpSum) {
         this.lumpSum = lumpSum;
     }
 
-    public String getMonthlyPayment() {
+    public double getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    public void setMonthlyPayment(String monthlyPayment) {
+    public void setMonthlyPayment(double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public String getAddressName() {
-        return addressName;
+    public String getAddressId() {
+        return addressId;
     }
 
-    public void setAddressName(String addressName) {
-        this.addressName = addressName;
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getResidenceStatus() {
-        return residenceStatus;
-    }
-
-    public void setResidenceStatus(String residenceStatus) {
-        this.residenceStatus = residenceStatus;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

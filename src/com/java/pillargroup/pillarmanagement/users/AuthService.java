@@ -37,4 +37,24 @@ public class AuthService {
 
         return user;
     }
+
+    public void register(String firstName, String lastName, String email, String password) throws ServiceException {
+        if (firstName == null || firstName.isBlank()
+                || lastName == null || lastName.isBlank()
+                || email == null || email.isBlank()
+                || password == null || password.isBlank()) {
+            throw new ServiceException("Todos los campos son obligatorios.");
+        }
+
+        User nuevoUsuario = new User(null, firstName, lastName, email, password, null, 0);
+
+        try {
+            boolean creado = authRepository.save(nuevoUsuario);
+            if (!creado) {
+                throw new ServiceException("No se pudo crear el usuario.");
+            }
+        } catch (SQLException e) {
+            throw new ServiceException("No se pudo conectar con la base de datos.");
+        }
+    }
 }
