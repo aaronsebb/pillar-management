@@ -88,3 +88,5 @@ public class ResidenceService {
         }
     }
 }
+
+//Resolver conflictos
