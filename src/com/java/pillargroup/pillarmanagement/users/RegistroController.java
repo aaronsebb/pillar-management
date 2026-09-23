@@ -44,15 +44,14 @@ public class RegistroController {
                 0
         );
 
-        /*try {
+        try {
             authRepository.save(nuevoUsuario);
             errorLabel.setText("");
             SceneManager.getInstance().showLoginView();
         } catch (SQLException e) {
             errorLabel.setText("No se pudo crear el usuario.");
         }
-        NOTA: Descomentar cuando le hagan merge al guardado de usuarios de aaron
-        */ 
+        
     }
 
     @FXML
