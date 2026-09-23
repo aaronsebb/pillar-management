@@ -1,23 +1,28 @@
 package com.java.pillargroup.pillarmanagement.residence.model;
 
 /**
- *
  * @author informatica
  */
 public class Residence {
-    String residenceId;
-    String categoryName;
-    String statusName;
-    String urlImage;
-    String residenceName;
-    String depiction;
-    String lumpSum;
-    String monthlyPayment;
-    String addressName;
-    String userName;
-    String residenceStatus;
 
-    public Residence(String residenceId, String categoryName, String statusName, String urlImage, String residenceName, String depiction, String lumpSum, String monthlyPayment, String addressName, String userName, String residenceStatus) {
+    private String residenceId;
+    private String categoryName;
+    private String statusName;
+    private String urlImage;
+    private String residenceName;
+    private String depiction;
+    private String lumpSum;
+    private String monthlyPayment;
+    private String addressName;
+    private String userName;
+    private String residenceStatus;
+
+    public Residence() {
+    }
+
+    public Residence(String residenceId, String categoryName, String statusName, String urlImage, 
+                     String residenceName, String depiction, String lumpSum, String monthlyPayment, 
+                     String addressName, String userName, String residenceStatus) {
         this.residenceId = residenceId;
         this.categoryName = categoryName;
         this.statusName = statusName;
@@ -118,6 +123,4 @@ public class Residence {
     public void setResidenceStatus(String residenceStatus) {
         this.residenceStatus = residenceStatus;
     }
-    
-    
 }
