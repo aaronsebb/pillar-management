@@ -43,12 +43,17 @@ public class SceneManager {
         setRoot(loader, "Crear cuenta");
     }
 
+
+    public void showDashboardView() {
+    showDashboardView(null);
+    }
+    
     public void showDashboardView(UserDto usuarioActual) {
         FXMLLoader loader = load("dashboard-view.fxml");
         DashboardController controller = loader.getController();
-        //controller.setUsuarioActual(usuarioActual);
+        controller.setUsuarioActual(usuarioActual);
         setRoot(loader, "Dashboard");
-    }
+        }
 
     private FXMLLoader load(String fxmlFile) {
         try {
