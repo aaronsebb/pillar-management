@@ -39,6 +39,8 @@ public class AuthRepository{
         
         prstAsignation.executeUpdate();
         
+        conn.commit();<
+        
         }catch(SQLException e){
         
         conn.rollback();
