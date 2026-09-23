@@ -1,5 +1,5 @@
 
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.factory;
 
 
 public class UserFactory {

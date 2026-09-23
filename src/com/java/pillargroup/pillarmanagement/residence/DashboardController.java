@@ -4,7 +4,7 @@
  */
 package com.java.pillargroup.pillarmanagement.residence;
 
-import com.java.pillargroup.pillarmanagement.users.UserDto;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,7 +1,8 @@
 
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.respository;
 
 import com.java.pillargroup.pillarmanagement.config.DataBaseConnection;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;

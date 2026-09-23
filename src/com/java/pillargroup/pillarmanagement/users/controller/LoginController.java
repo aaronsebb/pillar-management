@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.controller;
 
+import com.java.pillargroup.pillarmanagement.users.service.AuthService;
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
