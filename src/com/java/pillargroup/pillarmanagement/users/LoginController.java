@@ -35,10 +35,15 @@ public class LoginController {
         }
     }
 
-    // tambien falta el onAction a este, ahi borran comentarios cuando se implemente
     @FXML
     private void handleIrARegistro() {
         SceneManager.getInstance().showRegistroView();
+    }
+    
+        // Vuelve al dashboard sin iniciar sesión (modo invitado).
+    @FXML
+    private void handleVolverAlDashboard() {
+        SceneManager.getInstance().showDashboardView();
     }
 
     private void mostrarError(String mensaje) {

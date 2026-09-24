@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.java.pillargroup.pillarmanagement.util;
 
 import com.java.pillargroup.pillarmanagement.users.UserDto;
 import com.java.pillargroup.pillarmanagement.residence.DashboardController;
+import com.java.pillargroup.pillarmanagement.users.RegistroController;
+import com.java.pillargroup.pillarmanagement.users.RegistroDireccionController;
+import com.java.pillargroup.pillarmanagement.users.RegistroDraft;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +41,20 @@ public class SceneManager {
         FXMLLoader loader = load("registro-view.fxml");
         setRoot(loader, "Crear cuenta");
     }
+    
+    public void showRegistroView(RegistroDraft draft) {
+        FXMLLoader loader = load("registro-view.fxml");
+        RegistroController controller = loader.getController();
+        controller.setDraft(draft);
+        setRoot(loader, "Crear cuenta");
+    }
+
+    public void showRegistroDireccionView(RegistroDraft draft) {
+        FXMLLoader loader = load("registro-direccion-view.fxml");
+        RegistroDireccionController controller = loader.getController();
+        controller.setDraft(draft);
+        setRoot(loader, "Crear cuenta - Dirección");
+    }
 
 
     public void showDashboardView() {
@@ -76,6 +89,9 @@ public class SceneManager {
         }
 
         stage.setTitle(title);
+        stage.sizeToScene();
+        stage.centerOnScreen();
         stage.show();
     }
+    
 }
