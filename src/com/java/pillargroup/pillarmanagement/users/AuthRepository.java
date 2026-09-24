@@ -39,7 +39,7 @@ public class AuthRepository{
         
         prstAsignation.executeUpdate();
         
-        conn.commit();<
+        conn.commit();
         
         }catch(SQLException e){
         
@@ -57,7 +57,7 @@ public class AuthRepository{
         
     
     
-    public boolean save(User user) throws SQLException{
+    public boolean saveUser(User user) throws SQLException{
     
     String sql = "Insert into users (first_name,last_name,email,password_hash,role_id) Values(?,?,?,?,?);";
     
