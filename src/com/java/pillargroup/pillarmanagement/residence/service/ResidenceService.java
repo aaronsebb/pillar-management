@@ -6,6 +6,10 @@ package com.java.pillargroup.pillarmanagement.residence.service;
 
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
 import com.java.pillargroup.pillarmanagement.residence.repository.ResidenceRepository;
+import com.java.pillargroup.pillarmanagement.addresses.model.Address;
+import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
+import com.java.pillargroup.pillarmanagement.exception.RepositoryException;
+import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +47,34 @@ public class ResidenceService {
 
     public List<Residence> findAll() throws SQLException {
         return residenceRepository.findAll();
+    }
+    
+        // Crea la dirección y la residencia. Si la residencia falla, borra la dirección para no dejarla huérfana.
+    public void createWithAddress(Residence residence, Address address) throws ServiceException {
+        AddressService addressService = new AddressService();
+        Address saved = null;
+        boolean created = false;
+
+        try {
+            saved = addressService.create(address);
+            residence.setAddressId(saved.getAddressId());
+            created = create(residence);
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        } catch (SQLException | RepositoryException e) {
+            throw new ServiceException("No se pudo guardar la residencia. Intenta de nuevo.");
+        } finally {
+            if (!created && saved != null) {
+                try {
+                    addressService.delete(saved.getAddressId());
+                } catch (Exception ignored) {
+                }
+            }
+        }
+
+        if (!created) {
+            throw new ServiceException("No se pudo guardar la residencia.");
+        }
     }
 
     public Residence update(Residence residence) throws SQLException {

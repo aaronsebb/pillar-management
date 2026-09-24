@@ -16,6 +16,7 @@ private int roleId;
         this.emai = emai;
         this.password_hash = password_hash;
         this.adressId = adressId;
+        this.roleId = roleId;
     }
 
     public String getUserId() {
@@ -64,6 +65,14 @@ private int roleId;
 
     public void setAdressId(String adressId) {
         this.adressId = adressId;
+    }
+    
+        public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
 }

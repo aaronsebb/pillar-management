@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.controller.DashboardController">
    <children>
       <BorderPane prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -56,7 +56,7 @@
                         </VBox>
                         <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="search-section">
                            <children>
-                              <TextField fx:id="searchField" prefHeight="42.0" prefWidth="400.0" promptText="Buscar por nombre o residencia..." styleClass="search-field" />
+                              <TextField fx:id="searchField" prefHeight="42.0" prefWidth="400.0" promptText="Buscar por nombre o descripción..." styleClass="search-field" />
                               <Label fx:id="availableCountLabel" styleClass="count-label" text="0 residencias disponibles" />
                            </children>
                         </HBox>
@@ -65,13 +65,13 @@
                            <children>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
-                                    <Label styleClass="section-title" text="Residencias disponibles" HBox.hgrow="ALWAYS" />
+                                    <Label styleClass="section-title" text="Residencias disponibles" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
                                     <Label styleClass="section-subtitle" text="Explora las opciones disponibles" />
                                  </children>
                               </HBox>
-                              <StackPane fx:id="residencesContainer" minHeight="350.0" prefHeight="400.0">
+                              <StackPane fx:id="residencesContainer" minHeight="350.0">
                                  <children>
-                                    <TilePane fx:id="residencesPane" alignment="TOP_LEFT" hgap="20.0" prefColumns="3" prefTileHeight="270.0" prefTileWidth="300.0" vgap="20.0" />
+                                    <TilePane fx:id="residencesPane" alignment="TOP_LEFT" hgap="20.0" prefColumns="3" prefTileWidth="300.0" vgap="20.0" />
                                     <VBox fx:id="emptyState" alignment="CENTER" managed="false" maxWidth="450.0" spacing="12.0" visible="false">
                                        <children>
                                           <Label styleClass="empty-icon" text="⌂" />

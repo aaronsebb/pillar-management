@@ -1,7 +1,8 @@
-
 package com.java.pillargroup.pillarmanagement.users;
-import com.java.pillargroup.pillarmanagement.exception.DatabaseException;
-import com.java.pillargroup.pillarmanagement.exception.EntradaVaciaException;
+
+import com.java.pillargroup.pillarmanagement.addresses.model.Address;
+import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
+import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import java.sql.SQLException;
 import main.java.dev.alpha.alphalogin.security.jbcrypt.BCrypt;
 
@@ -18,76 +19,6 @@ public class AuthService {
     public AuthService(AuthRepository authRepository) {
         this.authRepository = authRepository;
     }
-    
-    
-    public boolean saveUser(String email, String firstName, String lastName, String passwordHash, String userId, int roleId) throws DatabaseException, EntradaVaciaException{
-
-        if(email == null || !(email.matches("[^\\s@]+@[^\\s@]+\\.[^\\s@]+"))){
-
-            throw new EntradaVaciaException("El correo esta vacio o la variable es nula");
-            
-        }
-        
-        if (firstName == null || firstName.isBlank()) {
-    
-            throw new EntradaVaciaException("El primer nombre esta vacio o la variable es nula");
-            
-        }
-
-        if (lastName == null || lastName.isBlank()) {
-            
-            throw new EntradaVaciaException("El apellido esta vacio o la variable es nula");
-    
-        }
-
-        if (passwordHash == null || passwordHash.isBlank()) {
-    
-            throw new EntradaVaciaException("La contrasena esta vacio o la variable es nula");
-            
-        }
-
-        if (userId == null || userId.isBlank()) {
-            
-            throw new EntradaVaciaException("El id del usuario esta vacio o la variable es nula");
-    
-        }
-        
-        if(roleId == 0){
-        
-            throw new EntradaVaciaException("El rol no puede estar vacio");
-        
-        }
-        
-        email = email.trim();
-        firstName = firstName.trim();
-        lastName = lastName.trim();
-        passwordHash = passwordHash.trim();
-        userId = userId.trim();
-        
-        passwordHash = BCrypt.hashpw(passwordHash,BCrypt.gensalt());
-        
-        
-        User user = new User(userId, firstName, lastName, email, passwordHash, userId, roleId);
-        
-        try{
-            
-            return authRepository.saveUser(user);
-            
-        }catch(SQLException e){
-        
-        throw new DatabaseException("Excepcion en la base de datos");
-        
-        }
-    
-    
-    }
-   
-    
-    
-    
-    
-    
-}
 
     public UserDto login(String email, String password) throws ServiceException {
         if (email == null || email.isBlank() || password == null || password.isBlank()) {
@@ -96,39 +27,29 @@ public class AuthService {
 
         UserDto user;
         try {
-            user = authRepository.findUserByEmail(email);
+            user = authRepository.findUserByEmail(email.trim());
         } catch (SQLException e) {
             throw new ServiceException("No se pudo conectar con la base de datos.");
         }
 
-        if (user == null || !password.equals(user.getPasswordHash())) {
+        if (user == null || !passwordMatches(password, user.getPasswordHash())) {
             throw new ServiceException("Correo o contraseña incorrectos.");
         }
 
+        // El hash no debe viajar por la app.
+        user.setPasswordHash(null);
         return user;
     }
 
-    public void register(String firstName, String lastName, String email, String password) throws ServiceException {
-        if (firstName == null || firstName.isBlank()
-                || lastName == null || lastName.isBlank()
-                || email == null || email.isBlank()
-                || password == null || password.isBlank()) {
-            throw new ServiceException("Todos los campos son obligatorios.");
-        }
-
-        User nuevoUsuario = new User(null, firstName, lastName, email, password, null, 0);
-
+    private boolean passwordMatches(String plainPassword, String hash) {
         try {
-            boolean creado = authRepository.save(nuevoUsuario);
-            if (!creado) {
-                throw new ServiceException("No se pudo crear el usuario.");
-            }
-        } catch (SQLException e) {
-            throw new ServiceException("No se pudo conectar con la base de datos.");
+            return BCrypt.checkpw(plainPassword, hash);
+        } catch (Exception e) {
+            return false; // hash inválido (por ejemplo, un usuario viejo con contraseña en texto plano)
         }
     }
-    
-        // Paso 1 del registro: solo valida, no guarda nada.
+
+    // Paso 1 del registro: solo valida, no guarda nada.
     public void validarDatosCuenta(String firstName, String lastName, String email,
             String password, String confirmPassword) throws ServiceException {
         if (firstName == null || firstName.isBlank()
@@ -137,7 +58,7 @@ public class AuthService {
                 || password == null || password.isBlank()) {
             throw new ServiceException("Todos los campos son obligatorios.");
         }
-        if (!email.contains("@")) {
+        if (!email.matches("[^\\s@]+@[^\\s@]+\\.[^\\s@]+")) {
             throw new ServiceException("Ingresa un correo electrónico válido.");
         }
         if (!password.equals(confirmPassword)) {
@@ -161,7 +82,8 @@ public class AuthService {
                 addressId = savedAddress.getAddressId();
             }
 
-            User nuevoUsuario = new User(null, firstName, lastName, email, password, addressId, 0);
+            String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+            User nuevoUsuario = new User(null, firstName.trim(), lastName.trim(), email.trim(), passwordHash, addressId, 0);
             created = authRepository.save(nuevoUsuario, addressId);
 
         } catch (IllegalArgumentException e) {
@@ -185,4 +107,12 @@ public class AuthService {
             throw new ServiceException("No se pudo crear el usuario.");
         }
     }
-    
+    // Nombre completo de quien publicó una residencia (para la vista de detalles).
+    public String findFullNameByUserId(String userId) {
+        try {
+            return authRepository.findFullNameByUserId(userId);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+}

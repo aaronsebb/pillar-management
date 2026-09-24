@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.java.pillargroup.pillarmanagement.users;
 
-/**
- *
- * @author informatica
- */
-public class RegistroController {
-    
-}
-package com.java.pillargroup.pillarmanagement.users;
-
+import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import com.java.pillargroup.pillarmanagement.exception.ServiceException;
-import javafx.scene.control.Alert;
 
+/**
+ * Paso 1 del registro: datos de la cuenta. No guarda nada: valida, llena el
+ * RegistroDraft y pasa al paso 2 (dirección).
+ */
 public class RegistroController {
 
     @FXML
@@ -34,47 +24,14 @@ public class RegistroController {
 
     @FXML
     private PasswordField passwordField;
-    
+
     @FXML
     private PasswordField confirmpasswordField;
 
-    @FXML
-    private Label errorLabel;
-
-    private final AuthRepository authRepository = new AuthRepository();
     private final AuthService authService = new AuthService();
     private RegistroDraft draft = new RegistroDraft();
-    
-    
 
-    
-    //Esto lo voy a dejar para otra vista, una es para los datos del usuario y la otra es para la dirección
-    //Aunque esa va a ser opcional porque si no quieren meter la dirección, no los podemos obligar, entonces yo voy a dejar la lógica en eso.
-    /*@FXML
-    private void handleRegistro() {
-        // TODO: cuando exista AuthService.register(...), mover esta llamada
-        // ahi y quitar la dependencia directa a AuthRepository desde el controller.
-        User nuevoUsuario = new User(
-                null,
-                firstNameField.getText(),
-                lastNameField.getText(),
-                emailField.getText(),
-                passwordField.getText(),
-                null,
-                0
-        );
-
-        try {
-            authRepository.save(nuevoUsuario);
-            errorLabel.setText("");
-            SceneManager.getInstance().showLoginView();
-        } catch (SQLException e) {
-            errorLabel.setText("No se pudo crear el usuario.");
-        }
-        
-    }*/
-    
-        // Lo llama SceneManager cuando el usuario regresa del paso 2.
+    // Lo llama SceneManager cuando el usuario regresa del paso 2.
     public void setDraft(RegistroDraft draft) {
         this.draft = draft;
         firstNameField.setText(draft.getFirstName());

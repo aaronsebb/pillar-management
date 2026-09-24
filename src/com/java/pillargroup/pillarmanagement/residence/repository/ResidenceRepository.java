@@ -86,7 +86,11 @@ public class ResidenceRepository {
         
         try(PreparedStatement pstm = DataBaseConnection.getConnection().prepareStatement(sql);){
             
-            pstm.setInt(1, residence. getCategoryId());
+            if (residence.getCategoryId() > 0) {
+                pstm.setInt(1, residence.getCategoryId());
+            } else {
+                pstm.setNull(1, java.sql.Types.INTEGER); // sin categoría
+            }
             pstm.setInt(2, residence.getStatusId());
             pstm.setString(3, residence.getUrlImage());
             pstm.setString(4, residence.getResidenceName());
@@ -109,7 +113,11 @@ public class ResidenceRepository {
                    + "address_id = ?, user_id = ? where residence_id = ?";
 
         try (PreparedStatement pstm = DataBaseConnection.getConnection().prepareStatement(sql)) {
-            pstm.setInt(1, residence.getCategoryId());
+            if (residence.getCategoryId() > 0) {
+                pstm.setInt(1, residence.getCategoryId());
+            } else {
+                pstm.setNull(1, java.sql.Types.INTEGER); // sin categoría
+            }
             pstm.setInt(2, residence.getStatusId());
             pstm.setString(3, residence.getUrlImage());
             pstm.setString(4, residence.getResidenceName());

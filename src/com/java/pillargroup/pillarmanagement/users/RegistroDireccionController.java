@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 
 public class RegistroDireccionController {
 
-    private static final Map<String, Map<String, List<String>>> UBICACIONES = Map.of(
+    public static final Map<String, Map<String, List<String>>> UBICACIONES = Map.of(
             "Panamá", Map.of(
                     "Ciudad de Panamá", List.of("Bella Vista", "Betania", "San Francisco"),
                     "Colón", List.of("Colón", "Cristóbal")),
@@ -101,7 +101,7 @@ public class RegistroDireccionController {
             authService.register(draft.getFirstName(), draft.getLastName(),
                     draft.getEmail(), draft.getPassword(), address);
 
-            UserDto usuario = new UserDto(draft.getFirstName(), draft.getLastName(), draft.getEmail(), null);
+            UserDto usuario = authService.login(draft.getEmail(), draft.getPassword());
             SceneManager.getInstance().showDashboardView(usuario);
 
         } catch (ServiceException e) {
