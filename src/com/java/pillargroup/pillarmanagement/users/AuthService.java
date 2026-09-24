@@ -6,6 +6,7 @@ import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import java.sql.SQLException;
 import main.java.dev.alpha.alphalogin.security.jbcrypt.BCrypt;
 
+
 public class AuthService {
 
     private final AuthRepository authRepository;
@@ -106,7 +107,6 @@ public class AuthService {
             throw new ServiceException("No se pudo crear el usuario.");
         }
     }
-
     // Nombre completo de quien publicó una residencia (para la vista de detalles).
     public String findFullNameByUserId(String userId) {
         try {
