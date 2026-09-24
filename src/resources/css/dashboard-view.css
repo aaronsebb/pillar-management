@@ -1,0 +1,138 @@
+.dashboard-root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: "Segoe UI";
+}
+.top-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent transparent #E2E8F0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.brand-title {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+.brand-subtitle {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 12px;
+}
+.login-button {
+    -fx-background-color: #2563EB;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 11px 24px;
+    -fx-text-fill: #FFFFFF;
+}
+.login-button:hover {
+    -fx-background-color: #1D4ED8;
+}
+.login-button:pressed {
+    -fx-background-color: #1E40AF;
+}
+.content-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.content-scroll > .viewport {
+    -fx-background-color: #F8FAFC;
+}
+.content-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.content-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+.content-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 8px;
+}
+.main-content {
+    -fx-background-color: #F8FAFC;
+}
+.hero-section {
+    -fx-padding: 8px 0 8px 0;
+}
+.main-title {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+.main-description {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 15px;
+}
+.search-section {
+    -fx-padding: 4px 0 4px 0;
+}
+.search-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 9px;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 9px;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 14px;
+    -fx-prompt-text-fill: #94A3B8;
+}
+.search-field:focused {
+    -fx-border-color: #2563EB;
+    -fx-border-width: 1.5px;
+}
+.count-label {
+    -fx-background-color: #EFF6FF;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px 14px;
+    -fx-text-fill: #2563EB;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.section-title {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+}
+.section-subtitle {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 13px;
+}
+.empty-icon {
+    -fx-text-fill: #CBD5E1;
+    -fx-font-size: 58px;
+}
+.empty-title {
+    -fx-text-fill: #334155;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+.empty-description {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4px;
+    -fx-max-width: 400px;
+}
+.separator {
+    -fx-background-color: #E2E8F0;
+}
+
+.add-residence-button {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 18px;
+    -fx-text-fill: #334155;
+}
+.add-residence-button:hover {
+    -fx-background-color: #F8FAFC;
+    -fx-border-color: #94A3B8;
+}
+.add-residence-button:pressed {
+    -fx-background-color: #F1F5F9;
+}
