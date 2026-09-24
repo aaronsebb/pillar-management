@@ -1,10 +1,10 @@
 package com.java.pillargroup.pillarmanagement.util;
 
-import com.java.pillargroup.pillarmanagement.users.UserDto;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.residence.controller.DashboardController;
-import com.java.pillargroup.pillarmanagement.users.RegistroController;
-import com.java.pillargroup.pillarmanagement.users.RegistroDireccionController;
-import com.java.pillargroup.pillarmanagement.users.RegistroDraft;
+import com.java.pillargroup.pillarmanagement.users.controller.RegistroController;
+import com.java.pillargroup.pillarmanagement.users.controller.RegistroDireccionController;
+import com.java.pillargroup.pillarmanagement.users.draft.RegistroDraft;
 import com.java.pillargroup.pillarmanagement.residence.controller.ResidenceController;
 import com.java.pillargroup.pillarmanagement.residence.controller.DetalleResidenceController;
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;

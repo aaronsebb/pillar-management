@@ -4,8 +4,8 @@ import com.java.pillargroup.pillarmanagement.addresses.model.Address;
 import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
 import com.java.pillargroup.pillarmanagement.categories.service.CategoryService;
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
-import com.java.pillargroup.pillarmanagement.users.AuthService;
-import com.java.pillargroup.pillarmanagement.users.UserDto;
+import com.java.pillargroup.pillarmanagement.users.service.AuthService;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -15,9 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-/**
- * Detalles de una residencia. Es pública: la puede ver cualquiera, con o sin sesión.
- */
 public class DetalleResidenceController {
 
     private static final double IMAGE_WIDTH = 460;
@@ -54,7 +51,6 @@ public class DetalleResidenceController {
 
     private UserDto usuarioActual;
 
-    // Lo llama SceneManager al abrir la vista.
     public void setDatos(Residence residence, UserDto usuarioActual) {
         this.usuarioActual = usuarioActual;
 
@@ -71,7 +67,7 @@ public class DetalleResidenceController {
     }
 
     private String nombreEstado(int statusId) {
-        switch (statusId) { // según el script de la BD
+        switch (statusId) {
             case 1: return "Disponible";
             case 2: return "Vendida";
             case 3: return "Reservada";
@@ -101,7 +97,6 @@ public class DetalleResidenceController {
             image.progressProperty().addListener((obs, o, p) -> showIfLoaded.run());
             showIfLoaded.run();
         } catch (IllegalArgumentException e) {
-            // URL inválida: se queda el placeholder.
         }
     }
 
@@ -111,7 +106,6 @@ public class DetalleResidenceController {
             try {
                 text = new CategoryService().obtenerPorId(String.valueOf(categoryId)).getCategoryName();
             } catch (Exception e) {
-                // se queda "Sin categoría"
             }
         }
         categoryLabel.setText(text);
@@ -126,7 +120,6 @@ public class DetalleResidenceController {
                         + "\n" + a.getDistrict() + ", " + a.getCity() + ", " + a.getCountry();
             }
         } catch (Exception e) {
-            // se queda "Dirección no disponible"
         }
         addressLabel.setText(text);
     }

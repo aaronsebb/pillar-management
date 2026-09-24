@@ -1,4 +1,4 @@
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.model;
 
 
 public class Role {

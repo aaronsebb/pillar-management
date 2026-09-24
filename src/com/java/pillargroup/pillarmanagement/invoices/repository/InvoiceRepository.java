@@ -115,11 +115,10 @@ public class InvoiceRepository {
         }
     }
 
-    // ========== MAPEO ==========
     private Invoice mapResultSetToInvoice(ResultSet rs) throws SQLException {
         return new Invoice(
                 rs.getString("invoice_id"),
-                rs.getTimestamp("invoice_date"),          // Timestamp → Date
+                rs.getTimestamp("invoice_date"),
                 rs.getString("user_id"),
                 rs.getDouble("interests"),
                 rs.getString("residence_id"),

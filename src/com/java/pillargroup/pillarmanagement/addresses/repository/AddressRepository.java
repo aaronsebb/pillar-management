@@ -15,7 +15,6 @@ import java.util.UUID;
 public class AddressRepository {
 
     public Address save(Address address) throws SQLException {
-        // Si no trae ID, generamos uno
         if (address.getAddressId() == null || address.getAddressId().trim().isEmpty()) {
             address.setAddressId(UUID.randomUUID().toString());
         }
@@ -32,7 +31,7 @@ public class AddressRepository {
             ps.setString(4, address.getDistrict());
             ps.setString(5, address.getAvenue());
             ps.setString(6, address.getStreet());
-            ps.setString(7, address.getHouse()); // house → house_number
+            ps.setString(7, address.getHouse());
 
             ps.executeUpdate();
             return address;
@@ -125,7 +124,7 @@ public class AddressRepository {
                 rs.getString("district"),
                 rs.getString("avenue"),
                 rs.getString("street"),
-                rs.getString("house_number")   // house_number → house
+                rs.getString("house_number")
         );
     }
 }

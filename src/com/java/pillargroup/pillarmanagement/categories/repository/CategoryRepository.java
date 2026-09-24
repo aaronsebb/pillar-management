@@ -24,7 +24,6 @@ public class CategoryRepository {
 
             ps.executeUpdate();
 
-            // Recuperar el ID generado por AUTO_INCREMENT
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     category.setCategoryId(String.valueOf(generatedKeys.getInt(1)));
@@ -107,7 +106,6 @@ public class CategoryRepository {
         }
     }
 
-    // ========== MAPEO ==========
     private Category mapResultSetToCategory(ResultSet rs) throws SQLException {
         return new Category(
                 String.valueOf(rs.getInt("category_id")),

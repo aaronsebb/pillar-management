@@ -1,7 +1,10 @@
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.controller;
 
+import com.java.pillargroup.pillarmanagement.users.service.AuthService;
 import com.java.pillargroup.pillarmanagement.addresses.model.Address;
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
+import com.java.pillargroup.pillarmanagement.users.draft.RegistroDraft;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.util.List;
 import java.util.Map;

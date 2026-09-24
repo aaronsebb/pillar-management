@@ -48,9 +48,6 @@ public class InvoiceService {
 
     public List<Invoice> obtenerFacturasDeUsuario(String userId) throws ServiceException {
         try {
-            // El repo todavia no tiene un findByUserId; filtramos en memoria
-            // sobre findAll(). Si la tabla crece mucho, conviene agregar
-            // WHERE user_id = ? directo en el repository.
             return invoiceRepository.findAll().stream()
                     .filter(invoice -> userId.equals(invoice.getUserId()))
                     .collect(Collectors.toList());

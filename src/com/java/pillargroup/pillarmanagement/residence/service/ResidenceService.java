@@ -49,7 +49,6 @@ public class ResidenceService {
         return residenceRepository.findAll();
     }
     
-        // Crea la dirección y la residencia. Si la residencia falla, borra la dirección para no dejarla huérfana.
     public void createWithAddress(Residence residence, Address address) throws ServiceException {
         AddressService addressService = new AddressService();
         Address saved = null;
@@ -120,5 +119,3 @@ public class ResidenceService {
         }
     }
 }
-
-//Resolver conflictos
