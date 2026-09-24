@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,25 +12,29 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.DashboardController">
    <children>
       <BorderPane prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="76.0" spacing="20.0" styleClass="top-bar" BorderPane.alignment="CENTER">
                <padding>
-                  <Insets bottom="15.0" left="42.0" right="42.0" top="15.0"/>
+                  <Insets bottom="15.0" left="42.0" right="42.0" top="15.0" />
                </padding>
                <children>
                   <VBox spacing="2.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label styleClass="brand-title" text="PILLAR GROUP"/>
-                        <Label styleClass="brand-subtitle" text="Encuentra el lugar ideal para vivir"/>
+                        <Label styleClass="brand-title" text="PILLAR GROUP" />
+                        <Label styleClass="brand-subtitle" text="Encuentra el lugar ideal para vivir" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="" styleClass="add-residence-button" text="Agregar residencia"/>
-                        <Button mnemonicParsing="false" onAction="#handleIrALogin" styleClass="login-button" text="Iniciar sesión"/>
+                        <Button mnemonicParsing="false" onAction="#handleAgregarResidencia" styleClass="add-residence-button" text="Agregar residencia" />
+                        <Label fx:id="bienvenidaLabel" managed="false" style="-fx-font-weight: bold;" visible="false" />
+                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleIrARegistro" styleClass="add-residence-button" text="Registrarse" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleIrALogin" styleClass="login-button" text="Iniciar sesión" />
+                        <Button fx:id="logoutButton" managed="false" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="add-residence-button" text="Cerrar sesión" visible="false" />
                      </children>
                   </HBox>
                </children>
@@ -40,38 +45,38 @@
                <content>
                   <VBox spacing="30.0" styleClass="main-content">
                      <padding>
-                        <Insets bottom="50.0" left="55.0" right="55.0" top="42.0"/>
+                        <Insets bottom="50.0" left="55.0" right="55.0" top="42.0" />
                      </padding>
                      <children>
                         <VBox spacing="8.0" styleClass="hero-section">
                            <children>
-                              <Label styleClass="main-title" text="Encuentra tu próximo hogar"/>
-                              <Label styleClass="main-description" text="Descubre nuestras residencias y encuentra un espacio que se adapte a tus necesidades."/>
+                              <Label styleClass="main-title" text="Encuentra tu próximo hogar" />
+                              <Label styleClass="main-description" text="Descubre nuestras residencias y encuentra un espacio que se adapte a tus necesidades." />
                            </children>
                         </VBox>
                         <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="search-section">
                            <children>
-                              <TextField fx:id="searchField" prefHeight="42.0" prefWidth="400.0" promptText="Buscar por nombre o residencia..." styleClass="search-field"/>
-                              <Label fx:id="availableCountLabel" styleClass="count-label" text="0 residencias disponibles"/>
+                              <TextField fx:id="searchField" prefHeight="42.0" prefWidth="400.0" promptText="Buscar por nombre o residencia..." styleClass="search-field" />
+                              <Label fx:id="availableCountLabel" styleClass="count-label" text="0 residencias disponibles" />
                            </children>
                         </HBox>
-                        <Separator/>
+                        <Separator />
                         <VBox spacing="18.0">
                            <children>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
-                                    <Label styleClass="section-title" text="Residencias disponibles" HBox.hgrow="ALWAYS"/>
-                                    <Label styleClass="section-subtitle" text="Explora las opciones disponibles"/>
+                                    <Label styleClass="section-title" text="Residencias disponibles" HBox.hgrow="ALWAYS" />
+                                    <Label styleClass="section-subtitle" text="Explora las opciones disponibles" />
                                  </children>
                               </HBox>
                               <StackPane fx:id="residencesContainer" minHeight="350.0" prefHeight="400.0">
                                  <children>
-                                    <TilePane fx:id="residencesPane" alignment="TOP_LEFT" hgap="20.0" prefColumns="3" prefTileHeight="270.0" prefTileWidth="300.0" vgap="20.0"/>
+                                    <TilePane fx:id="residencesPane" alignment="TOP_LEFT" hgap="20.0" prefColumns="3" prefTileHeight="270.0" prefTileWidth="300.0" vgap="20.0" />
                                     <VBox fx:id="emptyState" alignment="CENTER" managed="false" maxWidth="450.0" spacing="12.0" visible="false">
                                        <children>
-                                          <Label styleClass="empty-icon" text="⌂"/>
-                                          <Label styleClass="empty-title" text="No hay residencias disponibles"/>
-                                          <Label styleClass="empty-description" text="Actualmente no contamos con residencias disponibles. Vuelve a consultar más adelante." textAlignment="CENTER" wrapText="true"/>
+                                          <Label styleClass="empty-icon" text="⌂" />
+                                          <Label styleClass="empty-title" text="No hay residencias disponibles" />
+                                          <Label styleClass="empty-description" text="Actualmente no contamos con residencias disponibles. Vuelve a consultar más adelante." textAlignment="CENTER" wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children>

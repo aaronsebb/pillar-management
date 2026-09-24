@@ -29,7 +29,7 @@ public class ResidenceRepository {
                             rs.getInt("status_id"),
                             rs.getString("url_image"),
                             rs.getString("residence_name"),
-                            rs.getString("deciption"),
+                            rs.getString("depiction"),
                             rs.getDouble("lump_sum"),
                             rs.getDouble("monthly_payment"),
                             rs.getString("address_id"),
@@ -63,7 +63,7 @@ public class ResidenceRepository {
                         rs.getInt("status_id"),
                         rs.getString("url_image"),
                         rs.getString("residence_name"),
-                        rs.getString("deciption"),
+                        rs.getString("depiction"),
                         rs.getDouble("lump_sum"),
                         rs.getDouble("monthly_payment"),
                         rs.getString("address_id"),
@@ -82,7 +82,7 @@ public class ResidenceRepository {
     
     public boolean save(Residence residence){
         
-        String sql = "insert into residences (residence_id, category_id, status_id, url_image, residence_name, deciption, lump_sum, monthly_payment, address_id, user_id) values(UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into residences (residence_id, category_id, status_id, url_image, residence_name, depiction, lump_sum, monthly_payment, address_id, user_id) values(UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try(PreparedStatement pstm = DataBaseConnection.getConnection().prepareStatement(sql);){
             
@@ -105,7 +105,7 @@ public class ResidenceRepository {
     
     public Residence update(Residence residence) {
         String sql = "update residences set category_id = ?, status_id = ?, url_image = ?, "
-                   + "residence_name = ?, deciption = ?, lump_sum = ?, monthly_payment = ?, "
+                   + "residence_name = ?, depiction = ?, lump_sum = ?, monthly_payment = ?, "
                    + "address_id = ?, user_id = ? where residence_id = ?";
 
         try (PreparedStatement pstm = DataBaseConnection.getConnection().prepareStatement(sql)) {
@@ -148,7 +148,7 @@ public class ResidenceRepository {
         try (PreparedStatement pstm = DataBaseConnection.getConnection().prepareStatement(sql)) {
             pstm.setString(1, residenceId);
             try (ResultSet rs = pstm.executeQuery()) {
-                return rs.next(); // Retorna true si encontró al menos una coincidencia
+                return rs.next();
             }
         } catch (SQLException e) {
             throw new RepositoryException("Error al verificar existencia de la residencia");

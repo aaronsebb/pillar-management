@@ -173,3 +173,46 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
+
+
+
+/* ---------- Paso 2 del registro (añadido) ---------- */
+
+.secondary-button {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5DBD5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #315C3A;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8px 12px;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #EEF3EE;
+    -fx-border-color: #5F8A61;
+}
+
+.combo-box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5DBD5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #5F8A61;
+    -fx-border-width: 2px;
+}
+
+.combo-box > .list-cell {
+    -fx-text-fill: #303333;
+    -fx-padding: 0 0 0 12px;
+}

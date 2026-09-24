@@ -1,18 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.java.pillargroup.pillarmanagement.residence;
 
 import com.java.pillargroup.pillarmanagement.users.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 public class DashboardController {
 
     @FXML
     private Label bienvenidaLabel;
+
+    @FXML
+    private Button registerButton;
+
+    @FXML
+    private Button loginButton;
+
+    @FXML
+    private Button logoutButton;
 
     private UserDto usuarioActual;
 
@@ -23,11 +32,18 @@ public class DashboardController {
             return;
         }
 
-        if (usuarioActual != null) {
-            bienvenidaLabel.setText("Bienvenido, " + usuarioActual.getNombre());
-        } else {
-            bienvenidaLabel.setText("");
-        }
+        boolean logueado = usuarioActual != null;
+
+        bienvenidaLabel.setText(logueado ? "Bienvenido, " + usuarioActual.getNombre() : "");
+        mostrar(bienvenidaLabel, logueado);
+        mostrar(logoutButton, logueado);
+        mostrar(loginButton, !logueado);
+        mostrar(registerButton, !logueado);
+    }
+
+    private void mostrar(Node nodo, boolean visible) {
+        nodo.setVisible(visible);
+        nodo.setManaged(visible);
     }
 
     // Para el boton "Iniciar sesion" del dashboard en modo invitado
@@ -36,9 +52,31 @@ public class DashboardController {
         SceneManager.getInstance().showLoginView();
     }
 
-    // Para el boton "Registrarme"
     @FXML
     private void handleIrARegistro() {
         SceneManager.getInstance().showRegistroView();
     }
+
+    // Cerrar sesión = volver al dashboard como invitado.
+    @FXML
+    private void handleCerrarSesion() {
+        SceneManager.getInstance().showDashboardView();
+    }
+
+    // Ejemplo de acción que requiere cuenta: al invitado se le ofrece iniciar sesión.
+    @FXML
+    private void handleAgregarResidencia() {
+        if (usuarioActual == null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Para agregar una residencia necesitas iniciar sesión. ¿Quieres hacerlo ahora?",
+                    ButtonType.YES, ButtonType.NO);
+            alert.setHeaderText(null);
+            alert.showAndWait()
+                    .filter(b -> b == ButtonType.YES)
+                    .ifPresent(b -> SceneManager.getInstance().showLoginView());
+            return;
+        }
+        // TODO: abrir la vista de agregar residencia
+    }
+
 }
