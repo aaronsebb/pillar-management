@@ -5,20 +5,6 @@ import com.java.pillargroup.pillarmanagement.exception.EntradaVaciaException;
 import java.sql.SQLException;
 import main.java.dev.alpha.alphalogin.security.jbcrypt.BCrypt;
 
-public class AuthService {
-    
-    
-        private AuthRepository authRepository;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.java.pillargroup.pillarmanagement.users;
-
-import com.java.pillargroup.pillarmanagement.exception.ServiceException;
-import java.sql.SQLException;
-import com.java.pillargroup.pillarmanagement.addresses.model.Address;
-import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
 
 public class AuthService {
 
@@ -200,4 +186,3 @@ public class AuthService {
         }
     }
     
-}
