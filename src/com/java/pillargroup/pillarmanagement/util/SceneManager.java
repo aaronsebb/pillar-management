@@ -1,10 +1,13 @@
 package com.java.pillargroup.pillarmanagement.util;
 
 import com.java.pillargroup.pillarmanagement.users.UserDto;
-import com.java.pillargroup.pillarmanagement.residence.DashboardController;
+import com.java.pillargroup.pillarmanagement.residence.controller.DashboardController;
 import com.java.pillargroup.pillarmanagement.users.RegistroController;
 import com.java.pillargroup.pillarmanagement.users.RegistroDireccionController;
 import com.java.pillargroup.pillarmanagement.users.RegistroDraft;
+import com.java.pillargroup.pillarmanagement.residence.controller.ResidenceController;
+import com.java.pillargroup.pillarmanagement.residence.controller.DetalleResidenceController;
+import com.java.pillargroup.pillarmanagement.residence.model.Residence;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -67,11 +70,25 @@ public class SceneManager {
         controller.setUsuarioActual(usuarioActual);
         setRoot(loader, "Dashboard");
         }
+    
+        public void showCrearResidenciaView(UserDto usuarioActual) {
+        FXMLLoader loader = load("residence-view.fxml");
+        ResidenceController controller = loader.getController();
+        controller.setUsuarioActual(usuarioActual);
+        setRoot(loader, "Agregar residencia");
+    }
+
+    public void showDetalleResidenciaView(Residence residence, UserDto usuarioActual) {
+        FXMLLoader loader = load("detalle-residence-view.fxml");
+        DetalleResidenceController controller = loader.getController();
+        controller.setDatos(residence, usuarioActual);
+        setRoot(loader, residence.getResidenceName());
+    }
 
     private FXMLLoader load(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/resources/view/" + fxmlFile));
+                    getClass().getResource("/com/resources/view/" + fxmlFile));
             loader.load();
             return loader;
         } catch (IOException e) {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0" styleClass="dashboard-root" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.controller.DetalleResidenceController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar">
+         <padding>
+            <Insets bottom="15.0" left="42.0" right="42.0" top="15.0" />
+         </padding>
+         <children>
+            <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="brand-title" text="PILLAR GROUP" />
+                  <Label styleClass="brand-subtitle" text="Detalles de la residencia" />
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#handleVolver" styleClass="add-residence-button" text="← Volver al inicio" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll">
+         <content>
+            <VBox alignment="TOP_CENTER" styleClass="main-content">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+               </padding>
+               <children>
+                  <HBox maxWidth="1000.0" spacing="32.0" styleClass="form-card">
+                     <padding>
+                        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+                     </padding>
+                     <children>
+                        <StackPane fx:id="imageContainer" maxHeight="300.0" maxWidth="460.0" minHeight="300.0" minWidth="460.0" styleClass="card-image" />
+
+                        <VBox spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="statusLabel" styleClass="count-label" />
+                              <Label fx:id="nameLabel" styleClass="form-title" wrapText="true" />
+
+                              <HBox alignment="BASELINE_LEFT" spacing="12.0">
+                                 <children>
+                                    <Label fx:id="priceLabel" styleClass="detail-price" />
+                                    <Label fx:id="monthlyLabel" styleClass="card-price-caption" />
+                                 </children>
+                              </HBox>
+
+                              <Separator />
+
+                              <Label styleClass="form-label" text="Descripción" />
+                              <Label fx:id="descriptionLabel" styleClass="card-description" wrapText="true" />
+
+                              <Label styleClass="form-label" text="Categoría" />
+                              <Label fx:id="categoryLabel" styleClass="card-description" />
+
+                              <Label styleClass="form-label" text="Dirección" />
+                              <Label fx:id="addressLabel" styleClass="card-description" wrapText="true" />
+
+                              <Label styleClass="form-label" text="Publicada por" />
+                              <Label fx:id="publisherLabel" styleClass="card-description" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

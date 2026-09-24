@@ -52,10 +52,6 @@ public class AuthRepository{
         }
     }
         }
-
-        
-        
-    
     
     public boolean saveUser(User user) throws SQLException{
     
@@ -78,7 +74,7 @@ public class AuthRepository{
     
     public UserDto findUserByEmail(String email) throws SQLException{
 
-        String sql = "Select u.first_name,u.last_name,u.email,u.password_hash,r.role_name from users as u inner join roles as r on u.role_id = r.role_id where u.email = ?";
+        String sql = "Select u.user_id,u.first_name,u.last_name,u.email,u.password_hash,r.role_name from users as u inner join roles as r on u.role_id = r.role_id where u.email = ?";
 
         try(Connection conn = DataBaseConnection.getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
 
@@ -88,7 +84,10 @@ public class AuthRepository{
 
                 if(rs.next()){
 
-                    return new UserDto(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password_hash"));
+                    UserDto dto = new UserDto(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password_hash"));
+                    dto.setUserId(rs.getString("user_id"));
+                    dto.setRole(rs.getString("role_name"));
+                    return dto;
 
                 }else{
 
@@ -154,6 +153,17 @@ public class AuthRepository{
             ps.setString(6, "Usuario");
 
             return ps.executeUpdate() > 0;
+        }
+    }
+    
+    public String findFullNameByUserId(String userId) throws SQLException {
+        String sql = "select first_name, last_name from users where user_id = ?";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getString("first_name") + " " + rs.getString("last_name") : null;
+            }
         }
     }
     

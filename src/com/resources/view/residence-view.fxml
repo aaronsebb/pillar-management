@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0" styleClass="dashboard-root" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.controller.ResidenceController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar">
+         <padding>
+            <Insets bottom="15.0" left="42.0" right="42.0" top="15.0" />
+         </padding>
+         <children>
+            <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="brand-title" text="PILLAR GROUP" />
+                  <Label styleClass="brand-subtitle" text="Agregar una residencia" />
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#handleCancelar" styleClass="add-residence-button" text="← Volver al inicio" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll">
+         <content>
+            <VBox alignment="TOP_CENTER" styleClass="main-content">
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+               </padding>
+               <children>
+                  <VBox maxWidth="760.0" spacing="14.0" styleClass="form-card">
+                     <padding>
+                        <Insets bottom="28.0" left="32.0" right="32.0" top="26.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="form-title" text="Datos de la residencia" />
+
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label styleClass="form-label" text="Nombre" />
+                              <TextField fx:id="nameField" promptText="Ej. Casa Los Pilares" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label styleClass="form-label" text="Descripción (máx. 160 caracteres)" />
+                              <TextArea fx:id="descriptionArea" prefRowCount="3" promptText="Describe la residencia: habitaciones, jardín, cercanía, etc." wrapText="true" />
+                           </children>
+                        </VBox>
+
+                        <GridPane hgap="16.0" vgap="14.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0" />
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0" />
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0" />
+                           </columnConstraints>
+                           <children>
+                              <VBox spacing="5.0" GridPane.columnIndex="0">
+                                 <children>
+                                    <Label styleClass="form-label" text="Categoría (opcional)" />
+                                    <ComboBox fx:id="categoryCombo" maxWidth="Infinity" promptText="Sin categoría" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label styleClass="form-label" text="Precio total" />
+                                    <TextField fx:id="priceField" promptText="Ej. 95000" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <Label styleClass="form-label" text="Pago mensual" />
+                                    <TextField fx:id="monthlyField" promptText="Ej. 650" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label styleClass="form-label" text="URL de la imagen (opcional)" />
+                              <TextField fx:id="imageField" promptText="https://..." />
+                           </children>
+                        </VBox>
+
+                        <Label styleClass="form-section" text="Dirección" />
+
+                        <GridPane hgap="16.0" vgap="14.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0" />
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0" />
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0" />
+                           </columnConstraints>
+                           <children>
+                              <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                 <children>
+                                    <Label styleClass="form-label" text="País" />
+                                    <ComboBox fx:id="countryCombo" maxWidth="Infinity" promptText="Selecciona un país" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                 <children>
+                                    <Label styleClass="form-label" text="Ciudad" />
+                                    <ComboBox fx:id="cityCombo" maxWidth="Infinity" promptText="Selecciona una ciudad" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                 <children>
+                                    <Label styleClass="form-label" text="Distrito" />
+                                    <ComboBox fx:id="districtCombo" maxWidth="Infinity" promptText="Selecciona un distrito" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label styleClass="form-label" text="Avenida" />
+                                    <TextField fx:id="avenueField" promptText="Ingresa la avenida" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label styleClass="form-label" text="Calle" />
+                                    <TextField fx:id="streetField" promptText="Ingresa la calle" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label styleClass="form-label" text="Número de casa" />
+                                    <TextField fx:id="houseField" promptText="Ej. 12" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+
+                        <Label fx:id="errorLabel" style="-fx-text-fill: #DC2626; -fx-font-weight: bold;" wrapText="true" />
+
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleCancelar" styleClass="add-residence-button" text="Cancelar" />
+                              <Button mnemonicParsing="false" onAction="#handleGuardar" styleClass="login-button" text="Guardar residencia" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
