@@ -4,6 +4,13 @@
  */
 package com.java.pillargroup.pillarmanagement.users;
 
+/**
+ *
+ * @author informatica
+ */
+public class LoginController {
+    
+}
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
