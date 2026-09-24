@@ -2,7 +2,7 @@ package com.java.pillargroup.pillarmanagement.residence.controller;
 
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
 import com.java.pillargroup.pillarmanagement.residence.service.ResidenceService;
-import com.java.pillargroup.pillarmanagement.users.UserDto;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.text.Normalizer;
 import java.text.NumberFormat;
@@ -29,7 +29,7 @@ import javafx.scene.layout.VBox;
 
 public class DashboardController {
 
-    private static final int STATUS_DISPONIBLE = 1; // residence_status: 1 = Disponible
+    private static final int STATUS_DISPONIBLE = 1;
     private static final double CARD_WIDTH = 300;
     private static final double IMAGE_HEIGHT = 150;
 
@@ -68,7 +68,6 @@ public class DashboardController {
         emptyState.managedProperty().bind(emptyState.visibleProperty());
         residencesPane.managedProperty().bind(residencesPane.visibleProperty());
 
-        // Buscador básico: filtra mientras el usuario escribe.
         searchField.textProperty().addListener((obs, oldText, text) -> mostrar(filtrar(text)));
 
         loadResidences();
@@ -94,13 +93,8 @@ public class DashboardController {
         nodo.setVisible(visible);
         nodo.setManaged(visible);
     }
-
-    // ------------------------------------------------------------------
-    // Residencias y buscador
-    // ------------------------------------------------------------------
-
+    
     private void loadResidences() {
-        // En segundo plano para que la ventana no se congele si la BD tarda.
         Task<List<Residence>> task = new Task<>() {
             @Override
             protected List<Residence> call() throws Exception {
@@ -129,7 +123,6 @@ public class DashboardController {
         thread.start();
     }
 
-    // Todas las palabras escritas deben aparecer en el nombre o la descripción (sin importar mayúsculas ni tildes).
     private List<Residence> filtrar(String text) {
         if (text == null || text.isBlank()) {
             return allResidences;
@@ -179,7 +172,6 @@ public class DashboardController {
         card.getStyleClass().add("residence-card");
         card.setPrefWidth(CARD_WIDTH);
         card.setMaxWidth(CARD_WIDTH);
-        // Click en la tarjeta = ver los detalles
         card.setOnMouseClicked(e -> SceneManager.getInstance().showDetalleResidenciaView(residence, usuarioActual));
 
         Label name = new Label(residence.getResidenceName());
@@ -237,15 +229,10 @@ public class DashboardController {
                 image.progressProperty().addListener((obs, o, p) -> showIfLoaded.run());
                 showIfLoaded.run();
             } catch (IllegalArgumentException e) {
-                // URL inválida: se queda el placeholder.
             }
         }
         return container;
     }
-
-    // ------------------------------------------------------------------
-    // Sesión
-    // ------------------------------------------------------------------
 
     @FXML
     private void handleIrALogin() {
@@ -257,7 +244,6 @@ public class DashboardController {
         SceneManager.getInstance().showRegistroView();
     }
 
-    // Cerrar sesión = volver al dashboard como invitado.
     @FXML
     private void handleCerrarSesion() {
         SceneManager.getInstance().showDashboardView();

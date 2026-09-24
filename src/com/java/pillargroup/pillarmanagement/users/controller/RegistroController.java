@@ -1,16 +1,14 @@
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.controller;
 
+import com.java.pillargroup.pillarmanagement.users.service.AuthService;
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
+import com.java.pillargroup.pillarmanagement.users.draft.RegistroDraft;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-/**
- * Paso 1 del registro: datos de la cuenta. No guarda nada: valida, llena el
- * RegistroDraft y pasa al paso 2 (dirección).
- */
 public class RegistroController {
 
     @FXML
@@ -31,7 +29,6 @@ public class RegistroController {
     private final AuthService authService = new AuthService();
     private RegistroDraft draft = new RegistroDraft();
 
-    // Lo llama SceneManager cuando el usuario regresa del paso 2.
     public void setDraft(RegistroDraft draft) {
         this.draft = draft;
         firstNameField.setText(draft.getFirstName());
@@ -41,7 +38,6 @@ public class RegistroController {
         confirmpasswordField.setText(draft.getPassword());
     }
 
-    // Botón "Continuar": valida y pasa al paso 2. Todavía no guarda nada.
     @FXML
     private void handleContinuar() {
         try {

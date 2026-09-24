@@ -25,7 +25,6 @@ public class AddressService {
     public Address create(Address address) throws SQLException {
         validate(address);
 
-        // Si no trae ID, el repository lo genera
         if (address.getAddressId() != null && !address.getAddressId().trim().isEmpty()) {
             if (addressRepository.existsById(address.getAddressId())) {
                 throw new IllegalArgumentException("Ya existe una dirección con el ID: " + address.getAddressId());
@@ -68,7 +67,6 @@ public class AddressService {
         return addressRepository.deleteById(addressId);
     }
 
-    // ========== VALIDACIONES ==========
     private void validate(Address address) {
         if (address == null) {
             throw new IllegalArgumentException("La dirección no puede ser nula");

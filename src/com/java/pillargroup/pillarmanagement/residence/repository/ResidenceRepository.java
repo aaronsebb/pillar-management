@@ -89,7 +89,7 @@ public class ResidenceRepository {
             if (residence.getCategoryId() > 0) {
                 pstm.setInt(1, residence.getCategoryId());
             } else {
-                pstm.setNull(1, java.sql.Types.INTEGER); // sin categoría
+                pstm.setNull(1, java.sql.Types.INTEGER);
             }
             pstm.setInt(2, residence.getStatusId());
             pstm.setString(3, residence.getUrlImage());
@@ -116,7 +116,7 @@ public class ResidenceRepository {
             if (residence.getCategoryId() > 0) {
                 pstm.setInt(1, residence.getCategoryId());
             } else {
-                pstm.setNull(1, java.sql.Types.INTEGER); // sin categoría
+                pstm.setNull(1, java.sql.Types.INTEGER);
             }
             pstm.setInt(2, residence.getStatusId());
             pstm.setString(3, residence.getUrlImage());

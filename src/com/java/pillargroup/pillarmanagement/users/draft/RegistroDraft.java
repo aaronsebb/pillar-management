@@ -1,6 +1,5 @@
-package com.java.pillargroup.pillarmanagement.users;
+package com.java.pillargroup.pillarmanagement.users.draft;
 
-/** Datos del paso 1 del registro, guardados en memoria hasta que se crea la cuenta en el paso 2. */
 public class RegistroDraft {
 
     private String firstName;

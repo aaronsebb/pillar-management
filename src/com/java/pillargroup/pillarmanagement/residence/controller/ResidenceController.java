@@ -6,8 +6,8 @@ import com.java.pillargroup.pillarmanagement.categories.service.CategoryService;
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
 import com.java.pillargroup.pillarmanagement.residence.service.ResidenceService;
-import com.java.pillargroup.pillarmanagement.users.RegistroDireccionController;
-import com.java.pillargroup.pillarmanagement.users.UserDto;
+import com.java.pillargroup.pillarmanagement.users.controller.RegistroDireccionController;
+import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.util.function.UnaryOperator;
 import javafx.fxml.FXML;
@@ -19,13 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
 
-/**
- * Vista para crear una residencia. Solo usuarios con sesión iniciada.
- */
 public class ResidenceController {
 
-    private static final int STATUS_DISPONIBLE = 1; // residence_status: 1 = Disponible
-    private static final double MAX_MONEY = 99_999_999.99; // decimal(10,2)
+    private static final int STATUS_DISPONIBLE = 1;
+    private static final double MAX_MONEY = 99_999_999.99;
 
     @FXML
     private TextField nameField;
@@ -73,7 +70,6 @@ public class ResidenceController {
 
     @FXML
     private void initialize() {
-        // Límites de las columnas de la BD
         limitar(nameField, 80);
         limitar(imageField, 120);
         descriptionArea.setTextFormatter(new TextFormatter<String>(change ->
@@ -107,7 +103,6 @@ public class ResidenceController {
         try {
             categoryCombo.getItems().setAll(categoryService.listarCategorias());
         } catch (Exception e) {
-            // Sin categorías: el campo es opcional, se deja vacío.
         }
     }
 
