@@ -8,8 +8,19 @@ package com.java.pillargroup.pillarmanagement.exception;
  *
  * @author informatica
  */
-public class RepositoryException extends RuntimeException{
-    public RepositoryException(String message) {
-        super(message);
+public class ServiceException extends Exception {
+    /*galoo*/
+    public ServiceException(String message){
+        super (message);
+        
+        
+        
+        
     }
+    
+    public ServiceException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    
 }

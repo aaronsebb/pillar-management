@@ -1,0 +1,218 @@
+/* =========================================================
+   LOGIN - GRUPO PILARES
+   ========================================================= */
+
+/* ---------- Fondo general ---------- */
+
+.root {
+    -fx-background-color: #F7F8F7;
+}
+
+
+/* ---------- Panel derecho ---------- */
+
+.login-pane {
+    -fx-background-color: #F7F8F7;
+}
+
+
+/* ---------- Título ---------- */
+
+.login-title {
+    -fx-text-fill: #303333;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+
+/* ---------- Etiquetas ---------- */
+
+.field-label {
+    -fx-text-fill: #4A514B;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+
+/* ---------- Campos de texto ---------- */
+
+.text-field,
+.password-field {
+    -fx-background-color: #FFFFFF;
+
+    -fx-border-color: #D5DBD5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+
+    -fx-background-radius: 6px;
+
+    -fx-padding: 0 12px;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+
+    -fx-text-fill: #303333;
+
+    -fx-prompt-text-fill: #9AA19B;
+}
+
+
+/* Campo seleccionado */
+
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #5F8A61;
+    -fx-border-width: 2px;
+
+    -fx-background-color: #FFFFFF;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(49, 92, 58, 0.15),
+        6,
+        0,
+        0,
+        1
+    );
+}
+
+
+/* ---------- Botón iniciar sesión ---------- */
+
+.login-button {
+    -fx-background-color: #315C3A;
+
+    -fx-text-fill: #FFFFFF;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 6px;
+
+    -fx-cursor: hand;
+
+    -fx-padding: 10px 28px;
+}
+
+
+/* Hover */
+
+.login-button:hover {
+    -fx-background-color: #264B2E;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(49, 92, 58, 0.25),
+        8,
+        0,
+        0,
+        2
+    );
+}
+
+
+/* Cuando se presiona */
+
+.login-button:pressed {
+    -fx-background-color: #1F4026;
+
+    -fx-translate-y: 1px;
+}
+
+
+/* ---------- Texto de registro ---------- */
+
+.register-label {
+    -fx-text-fill: #555D57;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+}
+
+
+/* ---------- Link ---------- */
+
+.register-link {
+    -fx-text-fill: #315C3A;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+
+    -fx-underline: false;
+
+    -fx-cursor: hand;
+}
+
+
+.register-link:hover {
+    -fx-text-fill: #5F8A61;
+    -fx-underline: true;
+}
+
+
+/* ---------- Mensajes de error ---------- */
+
+.error-label {
+    -fx-text-fill: #B33A3A;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+
+/* ---------- Mensajes correctos ---------- */
+
+.success-label {
+    -fx-text-fill: #315C3A;
+
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+
+
+/* ---------- Paso 2 del registro (añadido) ---------- */
+
+.secondary-button {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5DBD5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #315C3A;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8px 12px;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #EEF3EE;
+    -fx-border-color: #5F8A61;
+}
+
+.combo-box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D5DBD5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 14px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #5F8A61;
+    -fx-border-width: 2px;
+}
+
+.combo-box > .list-cell {
+    -fx-text-fill: #303333;
+    -fx-padding: 0 0 0 12px;
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="551.0" prefWidth="777.0" stylesheets="@../css/login-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.users.LoginController">
+   <children>
+      <BorderPane layoutX="-1.0" layoutY="-3.0" prefHeight="558.0" prefWidth="777.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <Pane prefHeight="579.0" prefWidth="275.0" styleClass="login-pane" stylesheets="@../css/login-view.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="33.0" layoutY="123.0" styleClass="login-title" stylesheets="@../css/login-view.css" text="Inicia sesión en Grupo Pilares" />
+                  <Label layoutX="34.0" layoutY="216.0" styleClass="field-label" stylesheets="@../css/login-view.css" text="Correo electrónico" />
+                  <Label layoutX="34.0" layoutY="276.0" styleClass="field-label" stylesheets="@../css/login-view.css" text="Contraseña" />
+                  <TextField fx:id="txtFieldEmail" layoutX="34.0" layoutY="233.0" prefHeight="25.0" prefWidth="286.0" styleClass="text-field" stylesheets="@../css/login-view.css" />
+                  <PasswordField fx:id="fieldPassword" layoutX="33.0" layoutY="293.0" prefHeight="25.0" prefWidth="288.0" styleClass="password-field" stylesheets="@../css/login-view.css" />
+                  <Button layoutX="91.0" layoutY="351.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="166.0" styleClass="login-button" stylesheets="@../css/login-view.css" text="Iniciar sesión" />
+                  <Label layoutX="79.0" layoutY="430.0" styleClass="register-label" stylesheets="@../css/login-view.css" text="¿Aún no tienes cuenta?" />
+                  <Hyperlink layoutX="209.0" layoutY="426.0" onAction="#handleIrARegistro" styleClass="register-link" stylesheets="@../css/login-view.css" text="Registrate" />
+                  <Hyperlink layoutX="24.0" layoutY="20.0" onAction="#handleVolverAlDashboard" styleClass="register-link" stylesheets="@../css/login-view.css" text="← Volver al inicio" />
+               </children>
+            </Pane>
+         </center>
+         <left>
+            <StackPane prefHeight="579.0" prefWidth="429.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="551.0" fitWidth="459.0" layoutX="-25.0" pickOnBounds="true" preserveRatio="true" styleClass="login-pane">
+                           <image>
+                              <Image url="@../image/residenciales_login_459x557.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="126.0" fitWidth="163.0" layoutX="304.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/218ac5ea-6465-4f47-9d39-27e2ba6ade7c.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

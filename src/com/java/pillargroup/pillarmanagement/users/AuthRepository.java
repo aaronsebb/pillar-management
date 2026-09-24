@@ -77,37 +77,36 @@ public class AuthRepository{
     
     
     public UserDto findUserByEmail(String email) throws SQLException{
-  
-        String sql = "Select u.first_name,u.last_name,u.password_hash,r.role_name from users as u inner join roles as r on u.role_id = r.role_id where email = ?";
-        
-    try(Connection conn = DataBaseConnection.getConnection();PreparedStatement prst = conn.prepareStatement(sql)){
-        
-    prst.setString(1, email);
-    
-    try(ResultSet rs = prst.executeQuery()){
-        
-    if(rs.next()){
-        
-    return new UserDto(rs.getString("first_name"),rs.getString("last_name"),rs.getString("password_hash"),rs.getString("role_name"));
-    
-    }else{
-        
-    return null;
-    }
-    
+
+        String sql = "Select u.first_name,u.last_name,u.email,u.password_hash,r.role_name from users as u inner join roles as r on u.role_id = r.role_id where u.email = ?";
+
+        try(Connection conn = DataBaseConnection.getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setString(1, email);
+
+            try(ResultSet rs = ps.executeQuery()){
+
+                if(rs.next()){
+
+                    return new UserDto(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password_hash"));
+
+                }else{
+
+                    return null;
+                }
+            }
         }
-    }
     }
     
     public String findUserPasswordHashByEmail(String email) throws SQLException{
     
     String sql = "select password_hash from users where email = ?";
     
-     try(Connection conn = DataBaseConnection.getConnection();PreparedStatement prst = conn.prepareStatement(sql)){
+     try(Connection conn = DataBaseConnection.getConnection();PreparedStatement ps = conn.prepareStatement(sql)){
         
-        prst.setString(1, email);
+        ps.setString(1, email);
     
-    try(ResultSet rs = prst.executeQuery()){
+    try(ResultSet rs = ps.executeQuery()){
     
     if(rs.next()){
         
@@ -116,13 +115,46 @@ public class AuthRepository{
     }else{
         
         return null;
-     
-    }
+        
+            }
+        }
         }
     }
+    
+    public boolean save(User user) throws SQLException {
+
+    String sql = "Insert into users (first_name,last_name,email,password_hash,role_id) Values(?,?,?,?,?);";
+
+    try (Connection conn = DataBaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, user.getFirstName());
+        ps.setString(2, user.getLastName());
+        ps.setString(3, user.getEmai());
+        ps.setString(4, user.getPassword_hash());
+        ps.setInt(5, user.getRoleId());
+
+        return ps.executeUpdate() > 0;
     }
+}
     
-    
-    
+    public boolean save(User user, String addressId) throws SQLException {
+
+        String sql = "Insert into users (first_name,last_name,email,password_hash,address_id,role_id) "
+                + "Values(?,?,?,?,?,(select role_id from roles where role_name = ?));";
+
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getEmai());
+            ps.setString(4, user.getPassword_hash());
+            ps.setString(5, addressId);
+            ps.setString(6, "Usuario");
+
+            return ps.executeUpdate() > 0;
+        }
+    }
     
 }
