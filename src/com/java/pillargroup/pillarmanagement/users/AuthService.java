@@ -3,6 +3,7 @@ package com.java.pillargroup.pillarmanagement.users;
 import com.java.pillargroup.pillarmanagement.exception.DatabaseException;
 import com.java.pillargroup.pillarmanagement.exception.EntradaVaciaException;
 import java.sql.SQLException;
+import main.java.dev.alpha.alphalogin.security.jbcrypt.BCrypt;
 
 public class AuthService {
     
@@ -12,15 +13,6 @@ public class AuthService {
     public AuthService(AuthRepository authRepository) {
         this.authRepository = authRepository;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     public boolean saveUser(String email, String firstName, String lastName, String passwordHash, String userId, int roleId) throws DatabaseException, EntradaVaciaException{
@@ -66,7 +58,10 @@ public class AuthService {
         lastName = lastName.trim();
         passwordHash = passwordHash.trim();
         userId = userId.trim();
-
+        
+        passwordHash = BCrypt.hashpw(passwordHash,BCrypt.gensalt());
+        
+        
         User user = new User(userId, firstName, lastName, email, passwordHash, userId, roleId);
         
         try{
@@ -75,7 +70,7 @@ public class AuthService {
             
         }catch(SQLException e){
         
-        throw new DatabaseException(e.getSQLState());
+        throw new DatabaseException("Excepcion en la base de datos");
         
         }
     
