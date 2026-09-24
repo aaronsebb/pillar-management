@@ -3,6 +3,8 @@ build/
 dist/
 nbproject/
 nbbuild/
+nbbuild.xml
+
 
 #clases autogeneradas
 *.class
