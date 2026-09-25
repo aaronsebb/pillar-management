@@ -114,4 +114,40 @@ public class AuthService {
             return null;
         }
     }
+
+    public Address getUserAddress(String userId) {
+        try {
+            String addressId = authRepository.findAddressIdByUserId(userId);
+            if (addressId == null || addressId.isBlank()) {
+                return null;
+            }
+            return addressService.findById(addressId).orElse(null);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void updateUserAddress(String userId, Address address) throws ServiceException {
+        if (userId == null || userId.isBlank()) {
+            throw new ServiceException("Debes iniciar sesión para actualizar tu dirección.");
+        }
+
+        try {
+            String addressId = authRepository.findAddressIdByUserId(userId);
+
+            if (addressId == null || addressId.isBlank()) {
+                Address saved = addressService.create(address);
+                if (!authRepository.updateUserAddress(userId, saved.getAddressId())) {
+                    throw new ServiceException("No se pudo asociar la dirección a tu cuenta.");
+                }
+            } else {
+                address.setAddressId(addressId);
+                addressService.update(address);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        } catch (SQLException e) {
+            throw new ServiceException("No se pudo conectar con la base de datos.");
+        }
+    }
 }

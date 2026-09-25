@@ -34,6 +34,7 @@
                         <Label fx:id="bienvenidaLabel" managed="false" style="-fx-font-weight: bold;" visible="false" />
                         <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleIrARegistro" styleClass="add-residence-button" text="Registrarse" />
                         <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleIrALogin" styleClass="login-button" text="Iniciar sesión" />
+                        <Button fx:id="profileButton" managed="false" mnemonicParsing="false" onAction="#handleIrAPerfil" styleClass="add-residence-button" text="Mi perfil" visible="false" />
                         <Button fx:id="logoutButton" managed="false" mnemonicParsing="false" onAction="#handleCerrarSesion" styleClass="add-residence-button" text="Cerrar sesión" visible="false" />
                      </children>
                   </HBox>

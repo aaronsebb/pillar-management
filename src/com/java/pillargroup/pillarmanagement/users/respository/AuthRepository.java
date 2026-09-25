@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 
 public class AuthRepository{
     
-    
-    
     public void saveUserAddress(Address address,String userId) throws SQLException{
         
     String sql1 = "insert into addresses values(?,?,?,?,?,?,?)";
@@ -167,5 +165,26 @@ public class AuthRepository{
             }
         }
     }
-    
+
+    public String findAddressIdByUserId(String userId) throws SQLException {
+        String sql = "select address_id from users where user_id = ?";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getString("address_id") : null;
+            }
+        }
+    }
+
+    public boolean updateUserAddress(String userId, String addressId) throws SQLException {
+        String sql = "update users set address_id = ? where user_id = ?";
+        try (Connection conn = DataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, addressId);
+            ps.setString(2, userId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
 }

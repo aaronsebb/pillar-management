@@ -46,6 +46,9 @@ public class DashboardController {
     private Button logoutButton;
 
     @FXML
+    private Button profileButton;
+
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -85,6 +88,7 @@ public class DashboardController {
         bienvenidaLabel.setText(logueado ? "Bienvenido, " + usuarioActual.getFirstName() : "");
         mostrarNodo(bienvenidaLabel, logueado);
         mostrarNodo(logoutButton, logueado);
+        mostrarNodo(profileButton, logueado);
         mostrarNodo(loginButton, !logueado);
         mostrarNodo(registerButton, !logueado);
     }
@@ -247,6 +251,11 @@ public class DashboardController {
     @FXML
     private void handleCerrarSesion() {
         SceneManager.getInstance().showDashboardView();
+    }
+
+    @FXML
+    private void handleIrAPerfil() {
+        SceneManager.getInstance().showPerfilView(usuarioActual);
     }
 
     @FXML
