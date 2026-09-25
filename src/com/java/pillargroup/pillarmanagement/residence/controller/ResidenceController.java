@@ -27,6 +27,12 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ResidenceController {
 
@@ -369,4 +375,25 @@ public class ResidenceController {
             throw new ServiceException(etiqueta + " debe ser un número mayor a 0.");
         }
     }
+
+        public void printInvoiceToTxt(String invoiceId, Date invoiceDate, String userId, double interests, String residenceId, double payment, String paymentType) throws IOException {
+            String fileName = "../invoices/invoice_" + invoiceId + ".txt";
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                
+        writer.println("===== FACTURA =====");
+        writer.println("ID Factura: " + invoiceId);
+        writer.println("Fecha: " + dateFormat.format(invoiceDate));
+        writer.println("ID Usuario: " + userId);
+        writer.println("ID Residencia: " + residenceId);
+        writer.println("Intereses: " + String.format(Locale.US, "%.2f", interests));
+        writer.println("Pago: " + String.format(Locale.US, "%.2f", payment));
+        writer.println("Tipo de Pago: " + paymentType);
+        writer.println("====================");
+        
+    }
+}
+
 }
