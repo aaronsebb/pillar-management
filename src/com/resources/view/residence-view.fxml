@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0" styleClass="dashboard-root" stylesheets="@../css/dashboard-view.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.pillargroup.pillarmanagement.residence.controller.ResidenceController">
    <top>
@@ -85,16 +86,24 @@
                               </VBox>
                            </children>
                         </GridPane>
-
                         <VBox spacing="5.0">
-                           <children>
-                              <Label styleClass="form-label" text="URL de la imagen (opcional)" />
-                              <TextField fx:id="imageField" promptText="https://..." />
-                           </children>
-                        </VBox>
-
+                            <children>
+                               <Label styleClass="form-label" text="Imagen de la residencia (opcional)" />
+                               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                  <children>
+                                     <TextField fx:id="imageField" promptText="Pega aquí el link directo de la imagen (https://...)" HBox.hgrow="ALWAYS" />
+                                     <Button fx:id="buscarGoogleButton" mnemonicParsing="false" onAction="#handleBuscarGoogle" styleClass="add-residence-button" text="Buscar en Google" />
+                                  </children>
+                               </HBox>
+                               <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                  <children>
+                                     <ImageView fx:id="imagePreview" fitHeight="90.0" fitWidth="120.0" preserveRatio="true" />
+                                     <Label fx:id="imageStatusLabel" styleClass="card-description" wrapText="true" maxWidth="520.0" />
+                                  </children>
+                               </HBox>
+                            </children>
+                         </VBox>
                         <Label styleClass="form-section" text="Dirección" />
-
                         <GridPane hgap="16.0" vgap="14.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0" />
@@ -140,9 +149,7 @@
                               </VBox>
                            </children>
                         </GridPane>
-
                         <Label fx:id="errorLabel" style="-fx-text-fill: #DC2626; -fx-font-weight: bold;" wrapText="true" />
-
                         <HBox alignment="CENTER_RIGHT" spacing="10.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#handleCancelar" styleClass="add-residence-button" text="Cancelar" />
