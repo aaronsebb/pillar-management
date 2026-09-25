@@ -93,7 +93,7 @@ public class ProfileController {
     }
 
     private void cargarDireccionActual() {
-        Address direccion = authService.obtenerDireccion(usuarioActual.getUserId());
+        Address direccion = authService.getUserAddress(usuarioActual.getUserId());
         if (direccion == null) {
             return;
         }
@@ -117,7 +117,7 @@ public class ProfileController {
                     countryCombo.getValue(), cityCombo.getValue(), districtCombo.getValue(),
                     avenueField.getText().trim(), streetField.getText().trim(), houseField.getText().trim());
 
-            authService.actualizarDireccion(usuarioActual.getUserId(), address);
+            authService.updateUserAddress(usuarioActual.getUserId(), address);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Tu dirección se actualizó correctamente.");
             alert.setHeaderText(null);

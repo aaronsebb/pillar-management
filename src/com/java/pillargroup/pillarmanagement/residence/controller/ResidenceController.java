@@ -96,11 +96,7 @@ public class ResidenceController {
     public void setUsuarioActual(UserDto usuarioActual) {
         this.usuarioActual = usuarioActual;
     }
-
-    /**
-     * Activa el modo edición: precarga los datos de la residencia (y su
-     * dirección) en el formulario para que "Guardar" actualice en vez de crear.
-     */
+    
     public void setResidenciaEditar(Residence residencia) {
         this.residenciaEditar = residencia;
 

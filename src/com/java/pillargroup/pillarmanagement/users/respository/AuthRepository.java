@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 
 public class AuthRepository{
     
-    
-    
     public void saveUserAddress(Address address,String userId) throws SQLException{
         
     String sql1 = "insert into addresses values(?,?,?,?,?,?,?)";

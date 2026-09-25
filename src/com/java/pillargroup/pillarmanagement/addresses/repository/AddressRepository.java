@@ -115,7 +115,6 @@ public class AddressRepository {
         }
     }
 
-    // ========== MAPEO ==========
     private Address mapResultSetToAddress(ResultSet rs) throws SQLException {
         return new Address(
                 rs.getString("address_id"),

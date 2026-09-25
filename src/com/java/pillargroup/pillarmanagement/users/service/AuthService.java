@@ -115,11 +115,7 @@ public class AuthService {
         }
     }
 
-    /**
-     * Obtiene la dirección actualmente registrada por el usuario, o null si
-     * todavía no tiene ninguna asociada.
-     */
-    public Address obtenerDireccion(String userId) {
+    public Address getUserAddress(String userId) {
         try {
             String addressId = authRepository.findAddressIdByUserId(userId);
             if (addressId == null || addressId.isBlank()) {
@@ -131,12 +127,7 @@ public class AuthService {
         }
     }
 
-    /**
-     * Crea o actualiza la dirección del usuario. Si el usuario aún no tiene
-     * dirección, se crea una nueva y se enlaza a su cuenta; si ya tiene una,
-     * se actualiza en el mismo registro.
-     */
-    public void actualizarDireccion(String userId, Address address) throws ServiceException {
+    public void updateUserAddress(String userId, Address address) throws ServiceException {
         if (userId == null || userId.isBlank()) {
             throw new ServiceException("Debes iniciar sesión para actualizar tu dirección.");
         }
