@@ -4,15 +4,19 @@ import com.java.pillargroup.pillarmanagement.addresses.model.Address;
 import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
 import com.java.pillargroup.pillarmanagement.categories.service.CategoryService;
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
+import com.java.pillargroup.pillarmanagement.residence.service.ResidenceService;
 import com.java.pillargroup.pillarmanagement.users.service.AuthService;
 import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.text.NumberFormat;
 import java.util.Locale;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class DetalleResidenceController {
@@ -22,6 +26,9 @@ public class DetalleResidenceController {
 
     @FXML
     private StackPane imageContainer;
+
+    @FXML
+    private HBox ownerActions;
 
     @FXML
     private Label nameLabel;
@@ -48,11 +55,14 @@ public class DetalleResidenceController {
     private Label addressLabel;
 
     private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+    private final ResidenceService residenceService = new ResidenceService();
 
     private UserDto usuarioActual;
+    private Residence residenciaActual;
 
     public void setDatos(Residence residence, UserDto usuarioActual) {
         this.usuarioActual = usuarioActual;
+        this.residenciaActual = residence;
 
         nameLabel.setText(residence.getResidenceName());
         descriptionLabel.setText(vacioSiNulo(residence.getDepiction(), "Esta residencia no tiene descripción."));
@@ -64,6 +74,11 @@ public class DetalleResidenceController {
         cargarCategoria(residence.getCategoryId());
         cargarDireccion(residence.getAddressId());
         cargarPublicador(residence.getUserId());
+
+        boolean esPropietario = usuarioActual != null && usuarioActual.getUserId() != null
+                && usuarioActual.getUserId().equals(residence.getUserId());
+        ownerActions.setVisible(esPropietario);
+        ownerActions.setManaged(esPropietario);
     }
 
     private String nombreEstado(int statusId) {
@@ -136,5 +151,33 @@ public class DetalleResidenceController {
     @FXML
     private void handleVolver() {
         SceneManager.getInstance().showDashboardView(usuarioActual);
+    }
+
+    @FXML
+    private void handleActualizar() {
+        SceneManager.getInstance().showEditarResidenciaView(residenciaActual, usuarioActual);
+    }
+
+    @FXML
+    private void handleEliminar() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "¿Seguro que deseas eliminar la residencia \"" + residenciaActual.getResidenceName() + "\"? "
+                + "Esta acción no se puede deshacer.", ButtonType.YES, ButtonType.NO);
+        confirm.setHeaderText(null);
+        confirm.showAndWait().filter(b -> b == ButtonType.YES).ifPresent(b -> {
+            try {
+                residenceService.delete(residenciaActual.getResidenceId());
+
+                Alert ok = new Alert(Alert.AlertType.INFORMATION, "La residencia se eliminó correctamente.");
+                ok.setHeaderText(null);
+                ok.showAndWait();
+
+                SceneManager.getInstance().showDashboardView(usuarioActual);
+            } catch (Exception e) {
+                Alert error = new Alert(Alert.AlertType.ERROR, "No se pudo eliminar la residencia. Intenta de nuevo.");
+                error.setHeaderText(null);
+                error.showAndWait();
+            }
+        });
     }
 }

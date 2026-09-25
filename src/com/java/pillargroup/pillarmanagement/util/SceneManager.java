@@ -8,6 +8,7 @@ import com.java.pillargroup.pillarmanagement.users.draft.RegistroDraft;
 import com.java.pillargroup.pillarmanagement.residence.controller.ResidenceController;
 import com.java.pillargroup.pillarmanagement.residence.controller.DetalleResidenceController;
 import com.java.pillargroup.pillarmanagement.residence.model.Residence;
+import com.java.pillargroup.pillarmanagement.users.controller.ProfileController;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -83,6 +84,21 @@ public class SceneManager {
         DetalleResidenceController controller = loader.getController();
         controller.setDatos(residence, usuarioActual);
         setRoot(loader, residence.getResidenceName());
+    }
+
+    public void showEditarResidenciaView(Residence residence, UserDto usuarioActual) {
+        FXMLLoader loader = load("residence-view.fxml");
+        ResidenceController controller = loader.getController();
+        controller.setUsuarioActual(usuarioActual);
+        controller.setResidenciaEditar(residence);
+        setRoot(loader, "Actualizar residencia");
+    }
+
+    public void showPerfilView(UserDto usuarioActual) {
+        FXMLLoader loader = load("profile-view.fxml");
+        ProfileController controller = loader.getController();
+        controller.setUsuarioActual(usuarioActual);
+        setRoot(loader, "Mi perfil");
     }
 
     private FXMLLoader load(String fxmlFile) {

@@ -1,6 +1,7 @@
 package com.java.pillargroup.pillarmanagement.residence.controller;
 
 import com.java.pillargroup.pillarmanagement.addresses.model.Address;
+import com.java.pillargroup.pillarmanagement.addresses.service.AddressService;
 import com.java.pillargroup.pillarmanagement.categories.model.Category;
 import com.java.pillargroup.pillarmanagement.categories.service.CategoryService;
 import com.java.pillargroup.pillarmanagement.exception.ServiceException;
@@ -12,6 +13,7 @@ import com.java.pillargroup.pillarmanagement.util.SceneManager;
 import java.util.function.UnaryOperator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,6 +25,15 @@ public class ResidenceController {
 
     private static final int STATUS_DISPONIBLE = 1;
     private static final double MAX_MONEY = 99_999_999.99;
+
+    @FXML
+    private Label subtitleLabel;
+
+    @FXML
+    private Label formTitleLabel;
+
+    @FXML
+    private Button guardarButton;
 
     @FXML
     private TextField nameField;
@@ -65,8 +76,11 @@ public class ResidenceController {
 
     private final ResidenceService residenceService = new ResidenceService();
     private final CategoryService categoryService = new CategoryService();
+    private final AddressService addressService = new AddressService();
 
     private UserDto usuarioActual;
+    private Residence residenciaEditar;
+    private Address direccionEditar;
 
     @FXML
     private void initialize() {
@@ -81,6 +95,52 @@ public class ResidenceController {
 
     public void setUsuarioActual(UserDto usuarioActual) {
         this.usuarioActual = usuarioActual;
+    }
+
+    /**
+     * Activa el modo edición: precarga los datos de la residencia (y su
+     * dirección) en el formulario para que "Guardar" actualice en vez de crear.
+     */
+    public void setResidenciaEditar(Residence residencia) {
+        this.residenciaEditar = residencia;
+
+        if (subtitleLabel != null) {
+            subtitleLabel.setText("Actualizar residencia");
+        }
+        if (formTitleLabel != null) {
+            formTitleLabel.setText("Editar datos de la residencia");
+        }
+        if (guardarButton != null) {
+            guardarButton.setText("Actualizar residencia");
+        }
+
+        nameField.setText(residencia.getResidenceName());
+        descriptionArea.setText(residencia.getDepiction());
+        priceField.setText(String.valueOf(residencia.getLumpSum()));
+        monthlyField.setText(String.valueOf(residencia.getMonthlyPayment()));
+        imageField.setText(residencia.getUrlImage());
+
+        for (Category c : categoryCombo.getItems()) {
+            if (Integer.parseInt(c.getCategoryId()) == residencia.getCategoryId()) {
+                categoryCombo.setValue(c);
+                break;
+            }
+        }
+
+        try {
+            direccionEditar = addressService.findById(residencia.getAddressId()).orElse(null);
+        } catch (Exception e) {
+            direccionEditar = null;
+        }
+
+        if (direccionEditar != null) {
+            countryCombo.setValue(direccionEditar.getCountry());
+            cityCombo.setValue(direccionEditar.getCity());
+            districtCombo.setValue(direccionEditar.getDistrict());
+            avenueField.setText(direccionEditar.getAvenue());
+            streetField.setText(direccionEditar.getStreet());
+            houseField.setText(direccionEditar.getHouse());
+        }
     }
 
     private void limitar(TextField field, int max) {
@@ -151,24 +211,65 @@ public class ResidenceController {
 
             String image = imageField.getText().trim();
 
-            Residence residence = new Residence(null, categoryId, STATUS_DISPONIBLE,
-                    image.isEmpty() ? null : image, name, descriptionArea.getText().trim(),
-                    total, monthly, null, usuarioActual.getUserId());
+            if (residenciaEditar != null) {
+                actualizarResidencia(name, descriptionArea.getText().trim(), total, monthly, categoryId, image);
+            } else {
+                crearResidencia(name, descriptionArea.getText().trim(), total, monthly, categoryId, image);
+            }
 
-            Address address = new Address(null,
+        } catch (ServiceException e) {
+            errorLabel.setText(e.getMessage());
+        }
+    }
+
+    private void crearResidencia(String name, String description, double total, double monthly,
+            int categoryId, String image) throws ServiceException {
+
+        Residence residence = new Residence(null, categoryId, STATUS_DISPONIBLE,
+                image.isEmpty() ? null : image, name, description,
+                total, monthly, null, usuarioActual.getUserId());
+
+        Address address = new Address(null,
+                countryCombo.getValue(), cityCombo.getValue(), districtCombo.getValue(),
+                avenueField.getText().trim(), streetField.getText().trim(), houseField.getText().trim());
+
+        residenceService.createWithAddress(residence, address);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "La residencia se agregó correctamente.");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+
+        SceneManager.getInstance().showDashboardView(usuarioActual);
+    }
+
+    private void actualizarResidencia(String name, String description, double total, double monthly,
+            int categoryId, String image) throws ServiceException {
+        try {
+            residenciaEditar.setResidenceName(name);
+            residenciaEditar.setDepiction(description);
+            residenciaEditar.setLumpSum(total);
+            residenciaEditar.setMonthlyPayment(monthly);
+            residenciaEditar.setCategoryId(categoryId);
+            residenciaEditar.setUrlImage(image.isEmpty() ? null : image);
+
+            residenceService.update(residenciaEditar);
+
+            Address address = new Address(
+                    direccionEditar != null ? direccionEditar.getAddressId() : residenciaEditar.getAddressId(),
                     countryCombo.getValue(), cityCombo.getValue(), districtCombo.getValue(),
                     avenueField.getText().trim(), streetField.getText().trim(), houseField.getText().trim());
+            addressService.update(address);
 
-            residenceService.createWithAddress(residence, address);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "La residencia se agregó correctamente.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "La residencia se actualizó correctamente.");
             alert.setHeaderText(null);
             alert.showAndWait();
 
             SceneManager.getInstance().showDashboardView(usuarioActual);
 
-        } catch (ServiceException e) {
-            errorLabel.setText(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServiceException("No se pudo actualizar la residencia. Intenta de nuevo.");
         }
     }
 

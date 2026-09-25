@@ -67,6 +67,13 @@
 
                               <Label styleClass="form-label" text="Publicada por" />
                               <Label fx:id="publisherLabel" styleClass="card-description" />
+
+                              <HBox fx:id="ownerActions" alignment="CENTER_RIGHT" managed="false" spacing="10.0" visible="false">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#handleActualizar" styleClass="add-residence-button" text="Actualizar residencia" />
+                                    <Button mnemonicParsing="false" onAction="#handleEliminar" styleClass="danger-button" text="Eliminar residencia" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

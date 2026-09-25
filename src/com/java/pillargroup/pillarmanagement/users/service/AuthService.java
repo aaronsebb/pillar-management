@@ -114,4 +114,49 @@ public class AuthService {
             return null;
         }
     }
+
+    /**
+     * Obtiene la dirección actualmente registrada por el usuario, o null si
+     * todavía no tiene ninguna asociada.
+     */
+    public Address obtenerDireccion(String userId) {
+        try {
+            String addressId = authRepository.findAddressIdByUserId(userId);
+            if (addressId == null || addressId.isBlank()) {
+                return null;
+            }
+            return addressService.findById(addressId).orElse(null);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Crea o actualiza la dirección del usuario. Si el usuario aún no tiene
+     * dirección, se crea una nueva y se enlaza a su cuenta; si ya tiene una,
+     * se actualiza en el mismo registro.
+     */
+    public void actualizarDireccion(String userId, Address address) throws ServiceException {
+        if (userId == null || userId.isBlank()) {
+            throw new ServiceException("Debes iniciar sesión para actualizar tu dirección.");
+        }
+
+        try {
+            String addressId = authRepository.findAddressIdByUserId(userId);
+
+            if (addressId == null || addressId.isBlank()) {
+                Address saved = addressService.create(address);
+                if (!authRepository.updateUserAddress(userId, saved.getAddressId())) {
+                    throw new ServiceException("No se pudo asociar la dirección a tu cuenta.");
+                }
+            } else {
+                address.setAddressId(addressId);
+                addressService.update(address);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        } catch (SQLException e) {
+            throw new ServiceException("No se pudo conectar con la base de datos.");
+        }
+    }
 }

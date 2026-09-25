@@ -137,6 +137,25 @@
     -fx-background-color: #F1F5F9;
 }
 
+.danger-button {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-border-color: #DC2626;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 18px;
+    -fx-text-fill: #DC2626;
+}
+.danger-button:hover {
+    -fx-background-color: #FEF2F2;
+}
+.danger-button:pressed {
+    -fx-background-color: #FEE2E2;
+}
+
 .residence-card {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 12px;
