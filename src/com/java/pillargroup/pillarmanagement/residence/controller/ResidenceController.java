@@ -10,7 +10,12 @@ import com.java.pillargroup.pillarmanagement.residence.service.ResidenceService;
 import com.java.pillargroup.pillarmanagement.users.controller.RegistroDireccionController;
 import com.java.pillargroup.pillarmanagement.users.dto.UserDto;
 import com.java.pillargroup.pillarmanagement.util.SceneManager;
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.function.UnaryOperator;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,12 +24,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 
 public class ResidenceController {
 
     private static final int STATUS_DISPONIBLE = 1;
     private static final double MAX_MONEY = 99_999_999.99;
+    private static final double PREVIEW_SIZE = 120;
 
     @FXML
     private Label subtitleLabel;
@@ -52,6 +60,15 @@ public class ResidenceController {
 
     @FXML
     private TextField imageField;
+
+    @FXML
+    private Button buscarGoogleButton;
+
+    @FXML
+    private ImageView imagePreview;
+
+    @FXML
+    private Label imageStatusLabel;
 
     @FXML
     private ComboBox<String> countryCombo;
@@ -91,6 +108,12 @@ public class ResidenceController {
 
         cargarCategorias();
         configurarUbicaciones();
+
+        imageField.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                previsualizarImagen();
+            }
+        });
     }
 
     public void setUsuarioActual(UserDto usuarioActual) {
@@ -188,6 +211,64 @@ public class ResidenceController {
     }
 
     @FXML
+    private void handleBuscarGoogle() {
+        String termino = nameField.getText().trim();
+        String query = termino.isEmpty() ? "casa en venta" : termino;
+        try {
+            String url = "https://www.google.com/search?tbm=isch&q="
+                    + URLEncoder.encode(query, StandardCharsets.UTF_8);
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI(url));
+            } else {
+                imageStatusLabel.setText("No se pudo abrir el navegador en este equipo. Copia el link manualmente.");
+            }
+        } catch (Exception e) {
+            imageStatusLabel.setText("No se pudo abrir el navegador para buscar imágenes.");
+        }
+    }
+
+    private void previsualizarImagen() {
+        imagePreview.setImage(null);
+        imageStatusLabel.setText("");
+        String url = imageField.getText().trim();
+        if (url.isEmpty()) {
+            return;
+        }
+        try {
+            validarUrlImagen(url);
+        } catch (ServiceException e) {
+            imageStatusLabel.setText(e.getMessage());
+            return;
+        }
+
+        Image image = new Image(url, PREVIEW_SIZE, PREVIEW_SIZE, true, true, true);
+        image.errorProperty().addListener((obs, old, isError) -> {
+            if (isError) {
+                Platform.runLater(() -> {
+                    imagePreview.setImage(null);
+                    imageStatusLabel.setText("No se pudo cargar la imagen. Verifica que sea el link directo "
+                            + "a la imagen (clic derecho → 'Copiar dirección de la imagen') y no el de la página web.");
+                });
+            }
+        });
+        image.progressProperty().addListener((obs, old, progress) -> {
+            if (progress.doubleValue() >= 1.0 && !image.isError()) {
+                Platform.runLater(() -> {
+                    imagePreview.setImage(image);
+                    imageStatusLabel.setText("Vista previa cargada correctamente.");
+                });
+            }
+        });
+    }
+
+    private void validarUrlImagen(String url) throws ServiceException {
+        if (!url.matches("(?i)^https?://.+\\.(jpg|jpeg|png|gif|webp)(\\?.*)?$")) {
+            throw new ServiceException("El link debe ser directo a una imagen (terminar en .jpg, .png, .gif o "
+                    + ".webp), no el link de una página de resultados de Google.");
+        }
+    }
+
+    @FXML
     private void handleGuardar() {
         try {
             if (usuarioActual == null || usuarioActual.getUserId() == null) {
@@ -206,6 +287,9 @@ public class ResidenceController {
                     ? 0 : Integer.parseInt(categoryCombo.getValue().getCategoryId());
 
             String image = imageField.getText().trim();
+            if (!image.isEmpty()) {
+                validarUrlImagen(image);
+            }
 
             if (residenciaEditar != null) {
                 actualizarResidencia(name, descriptionArea.getText().trim(), total, monthly, categoryId, image);
